@@ -25,7 +25,7 @@ export const BackgroudMotion: React.FC<props> = ({ index }) => {
   }, []);
   const randomX = generateRandomValue(0, 100);
   const randomY = generateRandomValue(0, 100);
-  const randomDuration = generateRandomValue(1, 10);
+  const randomDuration = generateRandomValue(1, 5);
   const randomColor = generateRandomColor();
 
   return (
@@ -42,7 +42,7 @@ export const BackgroudMotion: React.FC<props> = ({ index }) => {
       animate={{ opacity: 1, scale: 1 }}
       transition={{
         duration: randomDuration,
-        delay: index * 0.2,
+        delay: index * 0.3,
         yoyo: Infinity,
       }}
     />
