@@ -12,4 +12,4 @@ export const NavAboutList = [
   { name: "代表挨拶", href: "/about/greeting" },
 ];
 
-export const FooterNavList = [, ...NavAboutList, ...NavList];
+export const FooterNavList = [...NavAboutList, ...NavList];
