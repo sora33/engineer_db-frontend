@@ -9,7 +9,7 @@ export default function MainLayout({
   return (
     <>
       <Header />
-      <main className="overflow-hidden pb-20">{children}</main>
+      <main className="pb-20">{children}</main>
       <Footer />
     </>
   );

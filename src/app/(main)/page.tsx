@@ -1,7 +1,6 @@
 import { Inner } from "@/components/atoms";
 import { Text } from "@/components/atoms";
 import { EngineerDbAboutCtt } from "@/app/(main)/_component/EngineerDbAboutCtt";
-import { SignInButton } from "@/components/layout/header/nav/SignInButton";
 import { MotionWhileInView } from "@/components/animation";
 import { BackgroudMotion } from "@/app/(main)/_component//BackgroudMotion";
 
@@ -31,10 +30,10 @@ export default function Page() {
       ))}
 
       <MotionWhileInView>
-        <div className="overflow-hidden bg-gray-50 py-20 text-center md:py-32">
+        <div className="overflow-hidden bg-orange-50/70 py-20 text-center md:py-32">
           <Inner>
             <MotionWhileInView>
-              <h1 className="text-2xl font-bold text-orange-500 md:text-4xl">
+              <h1 className="text-2xl font-bold text-orange-500/90 md:text-4xl">
                 エンジニアの全て、ここに集結。
               </h1>
             </MotionWhileInView>
@@ -54,8 +53,8 @@ export default function Page() {
           </Inner>
         </div>
       </MotionWhileInView>
-      <Inner className="" size="lg">
-        <section className="mt-20">
+      <Inner>
+        <section className="mt-8">
           <MotionWhileInView>
             <h2 className="mb-8 inline-block border-b-4 border-orange-300 text-2xl font-bold md:text-3xl">
               えんじにあDBとは？
