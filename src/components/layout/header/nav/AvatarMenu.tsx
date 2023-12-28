@@ -1,43 +1,74 @@
+"use client";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useRouter } from "next/navigation";
 import { SignOutButton } from "@/components/layout/header/nav/SignOutButton";
-import { Button } from "@/components/ui/button";
-import { UserIcon } from "lucide-react";
-import Link from "next/link";
-import { getServerSession } from "next-auth";
-import { nextAuthOption } from "@/lib/nextAuthOption";
+import { UserIcon, UserCircle2 } from "lucide-react";
+import { AvatarForm } from "@/components/layout/header/nav/AvatarForm";
+import { useState, useEffect } from "react";
 
-export const AvatarMenu = async () => {
-  const session = await getServerSession(nextAuthOption);
+export const AvatarMenu = () => {
+  const router = useRouter();
+  const [isShowDialog, setIsShowDialog] = useState(false);
+
+  const [avatar, setAvatar] = useState("");
+  const [userName, setUserName] = useState("");
+  const [userId, setUserId] = useState("");
+  useEffect(() => {
+    setAvatar(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/${localStorage.getItem(
+        "userAvatar"
+      )}`
+    );
+    setUserName(localStorage.getItem("userName") ?? "");
+    setUserId(localStorage.getItem("userId") ?? "");
+  }, []);
+
   return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Avatar className="cursor-pointer">
-          <AvatarImage src={session?.user?.image ?? ""} />
-          <AvatarFallback>
-            {session?.user?.name?.substring(0, 2) || ""}
-          </AvatarFallback>
-        </Avatar>
-      </PopoverTrigger>
-      <PopoverContent className="mr-4 max-w-[15rem]">
-        <ul className="grid gap-2">
-          <li>
-            <Button asChild variant="ghost" className="w-full justify-start">
-              <Link href="/profile">
-                <UserIcon className="mr-2 h-4 w-4" />
-                マイページ
-              </Link>
-            </Button>
-          </li>
-          <li>
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          <Avatar className="cursor-pointer">
+            <AvatarImage src={avatar} />
+            <AvatarFallback>{userName?.substring(0, 2) || ""}</AvatarFallback>
+          </Avatar>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem className="cursor-pointer py-0">
+            <div
+              className="flex py-2"
+              onClick={() => router.push(`/engineers/${userId}`)}
+            >
+              <UserIcon className="mr-2 h-4 w-4" />
+              <span>マイページ</span>
+            </div>
+          </DropdownMenuItem>
+          <DropdownMenuItem className="cursor-pointer py-0">
+            <div className="flex py-2" onClick={() => setIsShowDialog(true)}>
+              <UserCircle2 className="mr-2 h-4 w-4" />
+              <span>アバターを変更</span>
+            </div>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem className="cursor-pointer py-0">
             <SignOutButton />
-          </li>
-        </ul>
-      </PopoverContent>
-    </Popover>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <AvatarForm
+        isShowDialog={isShowDialog}
+        setIsShowDialog={setIsShowDialog}
+      />
+    </>
   );
 };

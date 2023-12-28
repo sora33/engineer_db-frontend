@@ -16,7 +16,7 @@ interface Props {
 export const MotionWhileInView: React.FC<Props> = ({
   children,
   delay = 0,
-  duration = 1.5,
+  duration = 1,
   translateY = "16",
   variant = "opacity",
   isAnimate,

@@ -4,6 +4,7 @@ import { TextProps } from "@/components/atoms/text";
 
 const HeadingVariants = tv({
   extend: TextVariants,
+  base: "font-bold",
 });
 
 interface Props extends TextProps {
