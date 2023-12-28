@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export const Header = () => {
   return (
-    <header className="bg-white py-4">
+    <header className="bg-white py-2 md:py-4">
       <Inner size="lg">
         <div className="flex items-center justify-between">
           <Link href="/">

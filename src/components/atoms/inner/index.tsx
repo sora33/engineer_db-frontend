@@ -1,10 +1,10 @@
 import { tv } from "tailwind-variants";
 
 export const InnerVariants = tv({
-  base: "mx-auto  max-w-full  px-4 md:px-8 md:container md:max-w-5xl",
+  base: "mx-auto  max-w-full  px-4 md:px-8 md:container md:max-w-4xl",
   variants: {
     size: {
-      lg: "md:max-w-6xl", // padding除くとmax-w:1216px FVとかデザイン重視
+      lg: "md:max-w-5xl", // padding除くとmax-w:1216px FVとかデザイン重視
     },
   },
 });

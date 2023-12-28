@@ -13,7 +13,7 @@ export const Nav = async () => {
       <ul className="flex items-center gap-2 font-bold">
         {isLogin ? (
           <>
-            <li>
+            <li className="flex items-center">
               <Button variant="ghost" className="px-2">
                 <Link href="/profile" className="flex items-center">
                   <SearchIcon className="mr-2 h-5 w-5" />
@@ -23,19 +23,19 @@ export const Nav = async () => {
                 </Link>
               </Button>
             </li>
-            <li>
+            <li className="flex items-center">
               <Button variant="ghost" className="px-2">
                 <Link href="/notification">
                   <BellIcon className="h-5 w-5" />
                 </Link>
               </Button>
             </li>
-            <li className="ml-4">
+            <li className="ml-4 mt-1 flex items-center">
               <AvatarMenu />
             </li>
           </>
         ) : (
-          <li>
+          <li className="flex items-center">
             <SignInButton />
           </li>
         )}
