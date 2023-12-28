@@ -1,6 +1,14 @@
 import type { NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import { customAxios } from "@/lib/customAxios";
+import { User, Session } from "next-auth";
+
+export type CustomUser = User & {
+  providerUserId: string;
+};
+export type CustomSession = Session & {
+  user?: CustomUser;
+};
 
 export const nextAuthOption: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -12,12 +20,13 @@ export const nextAuthOption: NextAuthOptions = {
   ],
   session: {
     strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60,
+    maxAge: 24 * 60 * 60,
   },
   callbacks: {
     async jwt({ token, user, account }) {
       if (account && user) {
         return {
+          id: user.id,
           provider: account.provider,
           providerUserId: user.id,
           name: user.name,
@@ -28,11 +37,12 @@ export const nextAuthOption: NextAuthOptions = {
           refreshToken: account.refresh_token,
         };
       }
+
       return token;
     },
 
     async session({ session, token, user }) {
-      session.user = token;
+      session.user = token as unknown as CustomUser;
       return { ...session, ...token, ...user };
     },
 
@@ -48,6 +58,8 @@ export const nextAuthOption: NextAuthOptions = {
         });
         if (res.status === 200) {
           user.name = res.data?.name;
+          user.id = res.data?.id;
+          user.image = res.data?.avatar;
           return true;
         } else {
           return false;
@@ -57,5 +69,8 @@ export const nextAuthOption: NextAuthOptions = {
         return false;
       }
     },
+  },
+  pages: {
+    signIn: "/auth/signin",
   },
 };
