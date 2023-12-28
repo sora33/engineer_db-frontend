@@ -1,5 +1,9 @@
 import "@/app/globals.css";
 import type { Metadata } from "next";
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
+import { NextAuthProvider } from "@/providers/NextAuthProvider";
+import { ToastProvider } from "@/providers/ToastProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -18,9 +22,13 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={``}>
-        {/* providerがあれば */}
-        {children}
-        {/* providerがあれば */}
+        <NextAuthProvider>
+          <ToastProvider>
+            <Header />
+            <main className="">{children}</main>
+            <Footer />
+          </ToastProvider>
+        </NextAuthProvider>
       </body>
     </html>
   );
