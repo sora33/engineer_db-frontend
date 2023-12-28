@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -18,9 +14,7 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     },
     "plugins": [
       {
@@ -32,9 +26,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
-, "src/components/layout/header/nav/Avatar.Menutsx"  ],
-  "exclude": [
-    "node_modules"
-  ]
+    ".next/types/**/*.ts",
+    "src/components/layout/header/nav/Avatar.Menutsx"
+  ],
+  "exclude": ["node_modules"]
 }
