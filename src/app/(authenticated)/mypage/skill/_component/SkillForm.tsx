@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Skill } from "@/types/skill";
 import "@/lib/zod";
-import { SkillRangeBar } from "@/app/(authenticated)/engineers/[id]/skill/_component/SkillRangeBar";
+import { SkillRangeBar } from "@/app/(authenticated)/mypage/skill/_component/SkillRangeBar";
 import { useState } from "react";
 import {
   PROJECT_SKILL_LIST,
@@ -16,8 +16,8 @@ import {
   DATABASE_SKILL_LIST,
   TOOL_SKILL_LIST,
   SKILL_LIST,
-} from "@/app/(authenticated)/engineers/[id]/skill/_component/constant";
-import { FileterSelect } from "@/app/(authenticated)/engineers/[id]/skill/_component/FileterSelect";
+} from "@/app/(authenticated)/mypage/skill/_component/constant";
+import { FileterSelect } from "@/app/(authenticated)/mypage/skill/_component/FileterSelect";
 import { useToast } from "@/providers/ToastProvider";
 
 let FormSchema = z.object({});
