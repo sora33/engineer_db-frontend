@@ -1,18 +1,19 @@
 import { cookies } from "next/headers";
 import { Skill } from "@/types/skill";
 import { Heading } from "@/components/atoms";
-import { SkillForm } from "@/app/(authenticated)/engineers/[id]/skill/_component/SkillForm";
+import { SkillForm } from "@/app/(authenticated)/mypage/skill/_component/SkillForm";
+import { useCurrentUserId } from "@/app/(authenticated)/_component/useCurrentUserId";
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page() {
   const token = cookies().get("next-auth.session-token")?.value;
+  const currentUserId = await useCurrentUserId();
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/users/${params.id}/skills`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/users/${currentUserId}/skills`,
     {
       headers: { Authorization: `Bearer ${token}` },
     }
   );
   const skills: Skill[] = await res.json();
-  const userId = params.id;
 
   return (
     <>
@@ -47,7 +48,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         </p>
         <p className="text-sm">※ 年数は目安です。</p>
       </div>
-      <SkillForm skills={skills} userId={userId} />
+      <SkillForm skills={skills} userId={currentUserId ?? ""} />
     </>
   );
 }

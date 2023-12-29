@@ -34,6 +34,8 @@ const FormSchema = z.object({
   comment: z.string().max(25).optional(),
   work: z.string().max(25).optional(),
   occupation: z.string().max(25).optional(),
+  gender: z.string().max(25).optional(),
+  experience: z.string().max(25).optional(),
   hobby: z.string().max(600).optional(),
   introduction: z.string().max(600).optional(),
 });
@@ -63,6 +65,54 @@ const WorkOptions = [
   { label: "その他", value: "other" },
 ];
 
+const GenderOptions = [
+  { label: "男性", value: "male" },
+  { label: "女性", value: "female" },
+  { label: "その他", value: "other" },
+];
+const ExperienceOptions = [
+  { label: "1年", value: "1" },
+  { label: "2年", value: "2" },
+  { label: "3年", value: "3" },
+  { label: "4年", value: "4" },
+  { label: "5年", value: "5" },
+  { label: "6年", value: "6" },
+  { label: "7年", value: "7" },
+  { label: "8年", value: "8" },
+  { label: "9年", value: "9" },
+  { label: "10年", value: "10" },
+  { label: "11年", value: "11" },
+  { label: "12年", value: "12" },
+  { label: "13年", value: "13" },
+  { label: "14年", value: "14" },
+  { label: "15年", value: "15" },
+  { label: "16年", value: "16" },
+  { label: "17年", value: "17" },
+  { label: "18年", value: "18" },
+  { label: "19年", value: "19" },
+  { label: "20年", value: "20" },
+  { label: "21年", value: "21" },
+  { label: "22年", value: "22" },
+  { label: "23年", value: "23" },
+  { label: "24年", value: "24" },
+  { label: "25年", value: "25" },
+  { label: "26年", value: "26" },
+  { label: "27年", value: "27" },
+  { label: "28年", value: "28" },
+  { label: "29年", value: "29" },
+  { label: "30年", value: "30" },
+  { label: "31年", value: "31" },
+  { label: "32年", value: "32" },
+  { label: "33年", value: "33" },
+  { label: "34年", value: "34" },
+  { label: "35年", value: "35" },
+  { label: "36年", value: "36" },
+  { label: "37年", value: "37" },
+  { label: "38年", value: "38" },
+  { label: "39年", value: "39" },
+  { label: "40年", value: "40" },
+];
+
 type Props = {
   user: User;
 };
@@ -82,6 +132,8 @@ export const ProfileForm: React.FC<Props> = ({ user }) => {
       purpose: user.purpose ?? undefined,
       comment: user.comment ?? undefined,
       hobby: user.hobby ?? undefined,
+      gender: user.gender ?? undefined,
+      experience: user?.experience?.toString() ?? undefined,
       introduction: user.introduction ?? undefined,
     },
   });
@@ -159,6 +211,62 @@ export const ProfileForm: React.FC<Props> = ({ user }) => {
                 <FormControl>
                   <Input placeholder="https://example.com" {...field} />
                 </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          <FormField
+            control={form.control}
+            name="experience"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>ご経験年数</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="未選択" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {ExperienceOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="gender"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>性別</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="未選択" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {GenderOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
                 <FormMessage />
               </FormItem>
             )}

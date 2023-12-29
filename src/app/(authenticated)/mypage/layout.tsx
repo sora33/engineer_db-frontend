@@ -1,4 +1,4 @@
-import { UserTabs } from "@/app/(authenticated)/engineers/[id]/_component/UserTabs";
+import { UserTabs } from "@/app/(authenticated)/mypage/_component/UserTabs";
 import { Inner } from "@/components/atoms";
 
 export default function MainLayout({

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export const SignInButton = () => {
   return (
-    <Button onClick={() => signIn("github", { callbackUrl: "/engineers" })}>
+    <Button onClick={() => signIn("github", { callbackUrl: "/mypage" })}>
       Githubでログインする
     </Button>
   );

@@ -19,7 +19,7 @@ export const MainTabs = async () => {
       name: "Massages",
     },
     {
-      link: `/engineers/${id}`,
+      link: `/mypage`,
       name: "MyPage",
     },
   ];

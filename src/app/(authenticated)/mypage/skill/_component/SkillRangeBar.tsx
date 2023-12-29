@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/form";
 import "@/lib/zod";
 import { Heading } from "@/components/atoms";
-import { FormSchemaType } from "@/app/(authenticated)/engineers/[id]/skill/_component/SkillForm";
+import { FormSchemaType } from "@/app/(authenticated)/mypage/skill/_component/SkillForm";
 import { UseFormReturn } from "react-hook-form";
 
 type Props = {

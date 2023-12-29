@@ -22,6 +22,7 @@ export const AvatarForm: React.FC<Props> = ({
   setIsShowDialog,
 }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const toast = useToast();
 
@@ -54,6 +55,7 @@ export const AvatarForm: React.FC<Props> = ({
       toast({ title: "画像を選択してください。", type: "error" });
       return;
     }
+    setIsLoading(true);
     const formData = new FormData();
     formData.append("avatar", selectedFile);
     try {
@@ -66,8 +68,11 @@ export const AvatarForm: React.FC<Props> = ({
       localStorage.setItem("userAvatar", resAvatar ?? "");
       toast({ title: "更新できました。", type: "success" });
       setIsShowDialog(false);
+      location.reload();
     } catch (error) {
       toast({ title: "エラーが発生しました", type: "error" });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -93,7 +98,9 @@ export const AvatarForm: React.FC<Props> = ({
                   >
                     キャンセル
                   </Button>
-                  <Button onClick={handleSubmit}>更新</Button>
+                  <Button isLoading={isLoading} onClick={handleSubmit}>
+                    更新
+                  </Button>
                 </div>
               </div>
             </DialogDescription>

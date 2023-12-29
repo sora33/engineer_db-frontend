@@ -11,9 +11,9 @@ export interface User {
   birthday: string;
   location: string;
   website: string;
-  contact: string;
-  sns: string;
-  last_sign_inAt: string;
+  gender: string;
+  experience: string;
+  lastSignInAt: string;
   createdAt: string;
   updatedAt: string;
 }

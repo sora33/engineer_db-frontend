@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useRouter } from "next/navigation";
 import { SignOutButton } from "@/components/layout/header/nav/SignOutButton";
-import { UserIcon, UserCircle2 } from "lucide-react";
+import { UserIcon, UserCircle2, X } from "lucide-react";
 import { AvatarForm } from "@/components/layout/header/nav/AvatarForm";
 import { useState, useEffect } from "react";
 
@@ -57,6 +57,12 @@ export const AvatarMenu = () => {
             <div className="flex py-2" onClick={() => setIsShowDialog(true)}>
               <UserCircle2 className="mr-2 h-4 w-4" />
               <span>アバターを変更</span>
+            </div>
+          </DropdownMenuItem>
+          <DropdownMenuItem className="cursor-pointer py-0">
+            <div className="flex py-2" onClick={() => router.push(`/quit`)}>
+              <X className="mr-2 h-4 w-4" />
+              <span>退会する</span>
             </div>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
