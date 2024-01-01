@@ -3,7 +3,7 @@ import { LogOutIcon } from "lucide-react";
 
 export const SignOutButton = () => {
   const hundleSignOut = () => {
-    signOut({ callbackUrl: "/?signOut=true" });
+    signOut({ callbackUrl: "/login?signOut=true" });
   };
 
   return (
