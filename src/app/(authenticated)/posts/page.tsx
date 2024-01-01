@@ -3,9 +3,9 @@ import useSWRInfinite from "swr/infinite";
 import { useEffect, useRef, useCallback } from "react";
 import { useIntersection } from "@/app/(authenticated)/posts/_component/useIntersection";
 import { Post } from "@/types/post";
-
 import { PostForm } from "@/app/(authenticated)/posts/_component/PostForm";
 import { PostList } from "@/app/(authenticated)/posts/_component/PostList";
+import { Loading } from "@/components/atoms";
 
 export default function Page() {
   // トリガーのdiv要素への参照
@@ -58,7 +58,7 @@ export default function Page() {
   }, [intersection, isReachingEnd, getPosts, isValidating]);
 
   if (error) return "failed to load";
-  if (!postList) return "loading...";
+  if (!postList) return <Loading />;
 
   // 一覧表示でデータを扱いやすいように整形
   const posts = postList.flat();
@@ -69,7 +69,7 @@ export default function Page() {
         <PostForm hundleSubmit={mutate} />
         <PostList posts={posts} />
         <div ref={ref}>
-          {!isReachingEnd ? "loading..." : "すべて読み込みました。"}
+          {!isReachingEnd ? <Loading /> : "すべて読み込みました。"}
           {isEmpty ? "取得するデータはありませんでした。" : null}
         </div>
       </div>
