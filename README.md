@@ -21,7 +21,6 @@ NEXT_PUBLIC_BACKEND_URL=http://localhost:3000
 
 - browser-image-compression で、フロントエンド側で画像圧縮するようにした
 - ダッシュボードは、ISR にした。API フェッチは SSR にして、状態管理が必要なコンポーネントのみを CSR にした。パフォーマンスとセキュリティのため
-  cache: "force-cache",
   next: {
   revalidate: 100000,
   },

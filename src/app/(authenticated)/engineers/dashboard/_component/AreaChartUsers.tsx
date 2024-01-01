@@ -1,6 +1,5 @@
 "use client";
-import { AreaChart, Card, Flex, Switch, Title } from "@tremor/react";
-import { useState } from "react";
+import { AreaChart, Card, Title } from "@tremor/react";
 
 const chartdata3 = [
   {
@@ -33,11 +32,14 @@ const chartdata3 = [
   },
 ];
 export const AreaChartUsers = () => {
-  const [value, setValue] = useState<boolean>(true);
   return (
-    <Card className="mx-auto max-w-2xl p-8">
+    <Card className="relative mx-auto max-w-2xl p-8">
+      <div className="absolute inset-0 z-20 flex items-center justify-center rounded bg-slate-500 opacity-50">
+        <p className="bg-white p-2 text-black">
+          現在、データが少ないので表示できません。
+        </p>
+      </div>
       <Title>「エンジニアDB」の利用者数の推移</Title>
-
       <AreaChart
         className="mt-4"
         data={chartdata3}

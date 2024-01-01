@@ -1,53 +1,62 @@
 "use client";
 import { Card, DonutChart, Title } from "@tremor/react";
+import {
+  OccupationDistribution,
+  PurposeDistribution,
+} from "@/app/(authenticated)/engineers/dashboard/_component/type";
+import { valueFormatter } from "@/app/(authenticated)/engineers/dashboard/_component/function";
 
-const cities = [
-  {
-    name: "エンジニア",
-    sales: 9800,
-  },
-  {
-    name: "プロジェクトマネージャー",
-    sales: 4567,
-  },
-  {
-    name: "コンサルタント",
-    sales: 3908,
-  },
-  {
-    name: "データアナリスト",
-    sales: 2400,
-  },
-  {
-    name: "CTO・技術顧問",
-    sales: 1908,
-  },
-  {
-    name: "その他",
-    sales: 1398,
-  },
-];
+type Props = {
+  occupationDistribution: OccupationDistribution;
+};
 
-export const valueFormatter = (number: number) =>
-  `${new Intl.NumberFormat("ja-JP").format(number)} 人`;
-
-export const DonutChartOccupation = () => (
-  <Card className="mx-auto max-w-2xl p-8">
-    <Title>職種</Title>
-    <DonutChart
-      className="mt-6"
-      data={cities}
-      category="sales"
-      index="name"
-      valueFormatter={valueFormatter}
-      colors={[
-        "green-900",
-        "green-700",
-        "green-500",
-        "green-300",
-        "green-100",
-        "slate",
-      ]}
-    />
-  </Card>
-);
+export const DonutChartOccupation: React.FC<Props> = ({
+  occupationDistribution,
+}) => {
+  const cities = [
+    {
+      name: "エンジニア",
+      sales: occupationDistribution.engineer,
+    },
+    {
+      name: "プロジェクトマネージャー",
+      sales: occupationDistribution.projectManager,
+    },
+    {
+      name: "コンサルタント",
+      sales: occupationDistribution.consultant,
+    },
+    {
+      name: "データアナリスト",
+      sales: occupationDistribution.dataAnalyst,
+    },
+    {
+      name: "CTO・技術顧問",
+      sales: occupationDistribution.cto,
+    },
+    {
+      name: "その他",
+      sales: occupationDistribution.other,
+    },
+  ];
+  return (
+    <Card className="mx-auto max-w-2xl p-8">
+      <Title>職種</Title>
+      <DonutChart
+        className="mt-6"
+        data={cities}
+        category="sales"
+        index="name"
+        valueFormatter={valueFormatter}
+        colors={[
+          "green-900",
+          "green-700",
+          "green-500",
+          "green-300",
+          "green-100",
+          "slate",
+        ]}
+      />
+    </Card>
+  );
+};
