@@ -1,17 +1,31 @@
+"use client";
 import { SecondTabsComp } from "@/components/layout/tabs/SecondTabsComp";
+import { useParams } from "next/navigation";
 
-export const UserTabs = async () => {
+type Props = {
+  variant?: "mypage" | "engineer";
+};
+
+export const UserTabs: React.FC<Props> = ({ variant = "mypage" }) => {
+  const { id } = useParams();
+  let path;
+  if (variant === "engineer") {
+    path = `/engineers/${id}`;
+  } else {
+    path = "/mypage";
+  }
+
   const UserTabsItems = [
     {
-      link: `/mypage`,
+      link: `${path}`,
       name: "Profile",
     },
     {
-      link: `/mypage/skill`,
+      link: `${path}/skill`,
       name: "Skill",
     },
     {
-      link: `/mypage/post`,
+      link: `${path}/post`,
       name: "Post",
     },
   ];
