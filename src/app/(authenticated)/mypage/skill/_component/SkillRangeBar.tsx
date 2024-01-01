@@ -13,9 +13,10 @@ import { UseFormReturn } from "react-hook-form";
 
 type Props = {
   title: string;
-  skillList: { key: string; value: string }[];
+  skillList: { label: string; value: string }[];
   filter: string;
   form: UseFormReturn<FormSchemaType>;
+  isView?: boolean;
 };
 
 export const SkillRangeBar: React.FC<Props> = ({
@@ -23,6 +24,7 @@ export const SkillRangeBar: React.FC<Props> = ({
   skillList,
   form,
   filter,
+  isView = false,
 }) => {
   const filterNumber = Number(filter);
   const filteredSkillList =
@@ -30,7 +32,7 @@ export const SkillRangeBar: React.FC<Props> = ({
       ? skillList
       : skillList.filter(
           (skill) =>
-            Number(form.watch(skill.key as keyof FormSchemaType) || 0) >=
+            Number(form.watch(skill.value as keyof FormSchemaType) || 0) >=
             filterNumber
         );
 
@@ -52,9 +54,9 @@ export const SkillRangeBar: React.FC<Props> = ({
         </div>
         {filteredSkillList.map((skill, index) => (
           <FormField
-            key={skill.key}
+            key={skill.value}
             control={form.control}
-            name={skill.key as keyof FormSchemaType}
+            name={skill.value as keyof FormSchemaType}
             render={({ field }) => (
               <FormItem
                 className={`flex items-center space-y-0 py-4 pr-4 ${
@@ -62,9 +64,9 @@ export const SkillRangeBar: React.FC<Props> = ({
                 }`}
               >
                 <FormLabel className="flex w-48 justify-between pl-4 text-xs sm:w-60 sm:text-sm">
-                  <span>{skill.value}</span>
+                  <span>{skill.label}</span>
                   <span className="mr-1 md:mr-2">
-                    {Number(form.watch(skill.key as keyof FormSchemaType)) ||
+                    {Number(form.watch(skill.value as keyof FormSchemaType)) ||
                       "未"}
                   </span>
                 </FormLabel>
@@ -75,7 +77,9 @@ export const SkillRangeBar: React.FC<Props> = ({
                     max={7}
                     step={1}
                     {...field}
-                    className="range-sm mb-6 h-1 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 accent-orange-500 dark:bg-gray-700"
+                    className={`range-sm mb-6 h-1 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 accent-orange-500 disabled:accent-orange-500 dark:bg-gray-700 ${
+                      isView ? "pointer-events-none" : ""
+                    }`}
                   />
                 </FormControl>
                 <FormMessage />

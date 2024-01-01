@@ -22,6 +22,7 @@ export const AvatarForm: React.FC<Props> = ({
   setIsShowDialog,
 }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const toast = useToast();
@@ -29,6 +30,8 @@ export const AvatarForm: React.FC<Props> = ({
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
+      const url = URL.createObjectURL(file);
+      setPreviewUrl(url);
 
       const options = {
         maxSizeMB: 1, // 最大ファイルサイズ
@@ -81,9 +84,9 @@ export const AvatarForm: React.FC<Props> = ({
       <Dialog open={isShowDialog} onOpenChange={setIsShowDialog}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>アバター画像を変更</DialogTitle>
+            <DialogTitle className="pb-2">アバター画像を変更</DialogTitle>
             <DialogDescription>
-              <div className="grid gap-2">
+              <div className="grid gap-4">
                 <Input
                   type="file"
                   accept="image/*"
@@ -91,6 +94,9 @@ export const AvatarForm: React.FC<Props> = ({
                   ref={inputRef}
                   onChange={handleFileChange}
                 />
+                <div>
+                  {previewUrl && <img src={previewUrl} alt="プレビュー画像" />}
+                </div>
                 <div className="grid grid-cols-2 gap-2">
                   <Button
                     variant="outline"

@@ -5,6 +5,7 @@ export const InnerVariants = tv({
   variants: {
     size: {
       lg: "md:max-w-5xl", // padding除くとmax-w:1216px FVとかデザイン重視
+      xl: "md:max-w-7xl", // padding除くとmax-w:1408px FVとかデザイン重視
     },
   },
 });
@@ -12,7 +13,7 @@ export const InnerVariants = tv({
 interface Props {
   children: React.ReactNode;
   className?: string;
-  size?: "lg";
+  size?: "lg" | "xl";
 }
 
 export const Inner: React.FC<Props> = ({ size, className, children }) => {

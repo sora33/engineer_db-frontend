@@ -28,7 +28,7 @@ const EngineerDbAboutCttList = [
 export default async function Page() {
   const session = await getServerSession();
   if (session) {
-    redirect("/users");
+    redirect("/engineers");
   }
 
   return (

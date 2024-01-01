@@ -15,7 +15,7 @@ export const Nav = async () => {
           <>
             <li className="flex items-center">
               <Button variant="ghost" className="px-2">
-                <Link href="/profile" className="flex items-center">
+                <Link href="/engineers" className="flex items-center">
                   <SearchIcon className="mr-2 h-5 w-5" />
                   <span className="hidden md:inline-block">
                     エンジニアを探す
@@ -23,13 +23,13 @@ export const Nav = async () => {
                 </Link>
               </Button>
             </li>
-            <li className="flex items-center">
+            {/* <li className="flex items-center">
               <Button variant="ghost" className="px-2">
                 <Link href="/notification">
                   <BellIcon className="h-5 w-5" />
                 </Link>
               </Button>
-            </li>
+            </li> */}
             <li className="ml-4 mt-1 flex items-center">
               <AvatarMenu />
             </li>

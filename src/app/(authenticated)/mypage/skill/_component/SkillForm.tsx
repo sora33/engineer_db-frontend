@@ -16,7 +16,7 @@ import {
   DATABASE_SKILL_LIST,
   TOOL_SKILL_LIST,
   SKILL_LIST,
-} from "@/app/(authenticated)/mypage/skill/_component/constant";
+} from "@/lib/ontions";
 import { FileterSelect } from "@/app/(authenticated)/mypage/skill/_component/FileterSelect";
 import { useToast } from "@/providers/ToastProvider";
 
@@ -24,7 +24,7 @@ let FormSchema = z.object({});
 SKILL_LIST.forEach((skill) => {
   FormSchema = FormSchema.merge(
     z.object({
-      [skill.key]: z.preprocess((v) => Number(v), z.number()),
+      [skill.value]: z.preprocess((v) => Number(v), z.number()),
     })
   );
 });
@@ -32,19 +32,21 @@ export type FormSchemaType = z.infer<typeof FormSchema>;
 
 type Props = {
   skills: Skill[];
-  userId: string;
+  isView?: boolean;
 };
 
-export const SkillForm: React.FC<Props> = ({ skills, userId }) => {
-  const [filter, setFilter] = useState("0");
+const userId = localStorage.getItem("userId");
+
+export const SkillForm: React.FC<Props> = ({ skills, isView = false }) => {
+  const [filter, setFilter] = useState(isView ? "1" : "0");
   const toast = useToast();
   const defaultValues = SKILL_LIST.reduce((values, skill) => {
     const foundSkill = skills
-      ? skills?.find((s) => s.name === skill.key)
+      ? skills?.find((s) => s.name === skill.value)
       : null;
     return {
       ...values,
-      [skill.key]: foundSkill ? foundSkill.level : 0,
+      [skill.value]: foundSkill ? foundSkill.level : 0,
     };
   }, {});
 
@@ -54,6 +56,9 @@ export const SkillForm: React.FC<Props> = ({ skills, userId }) => {
   });
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+    if (isView) {
+      return;
+    }
     const updatedFields = Object.keys(form.formState.dirtyFields);
     const updatedData = updatedFields.reduce((acc, curr) => {
       // @ts-ignore
@@ -80,7 +85,7 @@ export const SkillForm: React.FC<Props> = ({ skills, userId }) => {
   return (
     <Form {...form}>
       <div className="flex justify-end">
-        <FileterSelect onChange={setFilter} />
+        <FileterSelect onChange={setFilter} defaultValue={isView ? "1" : "0"} />
       </div>
       <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-6">
         <SkillRangeBar
@@ -88,44 +93,52 @@ export const SkillForm: React.FC<Props> = ({ skills, userId }) => {
           skillList={PROJECT_SKILL_LIST}
           form={form}
           filter={filter}
+          isView={isView}
         />
         <SkillRangeBar
           title="ソフトウェア開発"
           skillList={SOFTWHERE_SKILL_LIST}
           form={form}
           filter={filter}
+          isView={isView}
         />
         <SkillRangeBar
           title="プログラミング言語"
           skillList={PROGRAMMING_SKILL_LIST}
           form={form}
           filter={filter}
+          isView={isView}
         />
         <SkillRangeBar
           title="フレームワーク&ライブラリ"
           skillList={FRAMEWORK_SKILL_LIST}
           form={form}
           filter={filter}
+          isView={isView}
         />
         <SkillRangeBar
           title="データベース技術"
           skillList={DATABASE_SKILL_LIST}
           form={form}
           filter={filter}
+          isView={isView}
         />
         <SkillRangeBar
           title="サービス&ツール"
           skillList={TOOL_SKILL_LIST}
           form={form}
           filter={filter}
+          isView={isView}
         />
-        <Button
-          className="mx-auto mt-4 w-full max-w-md"
-          type="submit"
-          isLoading={form.formState.isSubmitting}
-        >
-          更新
-        </Button>
+        {!isView && (
+          <Button
+            className="mx-auto mt-4 w-full max-w-md"
+            type="submit"
+            onClick={() => form.formState.isSubmitting}
+          >
+            更新
+          </Button>
+        )}
       </form>
     </Form>
   );
