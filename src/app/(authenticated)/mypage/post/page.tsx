@@ -1,80 +1,85 @@
-import { Inner } from "@/components/atoms";
-import { Text } from "@/components/atoms";
-import { EngineerDbAboutCtt } from "@/app/(login)/_component/EngineerDbAboutCtt";
-import { MotionWhileInView } from "@/components/animation";
-
-const EngineerDbAboutCttList = [
-  {
-    title: "データを蓄積",
-    description: "サービスの利用者のデータを、エンジニアDBに蓄積します。",
-    imageAlt: "エンジニアDBにデータが蓄積される様子",
-  },
-  {
-    title: "エンジニアを探す",
-    description: "エンジニアDBを通して、エンジニアや企業とマッチングできます。",
-    imageAlt: "エンジニアDBでエンジニアを探す様子",
-  },
-  {
-    title: "データの可視化・活用",
-    description: "エンジニアDBのデータを分析し、効率的に共有します。",
-    imageAlt: "エンジニアDBにデータが蓄積される様子",
-  },
-];
+"use client";
+import useSWRInfinite from "swr/infinite";
+import { useEffect, useRef, useCallback } from "react";
+import { useIntersection } from "@/app/(authenticated)/posts/_component/useIntersection";
+import { Post } from "@/types/post";
+import { PostForm } from "@/app/(authenticated)/posts/_component/PostForm";
+import { PostList } from "@/app/(authenticated)/posts/_component/PostList";
+import { Heading, Loading } from "@/components/atoms";
 
 export default function Page() {
-  return (
-    <div className="relative">
-      <MotionWhileInView>
-        <div className="overflow-hidden bg-orange-50/70 py-20 text-center md:py-32">
-          <Inner>
-            <MotionWhileInView>
-              <h1 className="text-2xl font-bold text-orange-500/90 md:text-4xl">
-                エンジニアの全て、ここに集結。
-              </h1>
-            </MotionWhileInView>
-            <MotionWhileInView>
-              <Text className="mt-8 font-bold">
-                スキルも経験も情熱も、ここでつながる。
-              </Text>
-              <Text className="mt-4">
-                エンジニアの情報交換とマッチングの新しい形を提供します。
-                <br />
-                仕事目的、交流目的など、目的に合わせてご利用頂けます。
-              </Text>
-              <Text className="mt-4">
-                Githubでログインできますので、お気軽にご利用ください。
-              </Text>
-            </MotionWhileInView>
-          </Inner>
-        </div>
-      </MotionWhileInView>
-      <Inner>
-        <section className="mt-8">
-          <MotionWhileInView>
-            <h2 className="mb-8 inline-block border-b-4 border-orange-300 text-2xl font-bold md:text-3xl">
-              えんじにあDBとは？
-            </h2>
-          </MotionWhileInView>
+  // トリガーのdiv要素への参照
+  const ref = useRef<HTMLDivElement>(
+    null
+  ) as React.MutableRefObject<HTMLDivElement>;
+  // トリガーが表示されているか監視
+  const intersection = useIntersection(ref);
+  const limit = 10;
+  // useSWRInfiniteのキーとなるパラメータ付きURLを生成
+  const getKey = (pageIndex: number, previousPageData: Post[]) => {
+    if (previousPageData && !previousPageData.length) return null;
+    // pageIndexは0からのため+1をしてpageIndexを1からにする
+    return `/api/users/${localStorage.getItem("userId")}/posts?page=${
+      pageIndex + 1
+    }`;
+  };
+  // fetch　を使用してデータを取得
+  const {
+    data: postList,
+    error,
+    isValidating,
+    mutate,
+    size,
+    setSize,
+  } = useSWRInfinite(
+    getKey,
+    (url): Promise<Post[]> =>
+      fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((r) => r.json()),
+    {
+      initialSize: 2,
+    }
+  );
 
-          {EngineerDbAboutCttList.map((item, index) => (
-            <MotionWhileInView key={index}>
-              <EngineerDbAboutCtt
-                index={index + 1}
-                title={item.title}
-                description={item.description}
-                imageAlt={item.imageAlt}
-              />
-            </MotionWhileInView>
-          ))}
-        </section>
-        <section className="mt-20">
-          <MotionWhileInView>
-            <h2 className="mb-8 inline-block border-b-4 border-orange-300 text-2xl font-bold md:text-3xl">
-              つかってみる
-            </h2>
-          </MotionWhileInView>
-        </section>
-      </Inner>
-    </div>
+  const isEmpty = postList?.[0]?.length === 0;
+  const isReachingEnd =
+    isEmpty || (postList && postList[postList.length - 1]?.length < limit);
+
+  const getPosts = useCallback(async () => {
+    setSize(size + 1);
+  }, [size, setSize]);
+
+  useEffect(() => {
+    if (intersection && !isReachingEnd && !isValidating) {
+      getPosts();
+    }
+  }, [intersection, isReachingEnd, getPosts, isValidating]);
+
+  if (error) return "failed to load";
+  if (!postList) return <Loading />;
+
+  // 一覧表示でデータを扱いやすいように整形
+  const posts = postList.flat();
+
+  return (
+    <>
+      <div className="pb-4">
+        <Heading as="h1" size="lg">
+          投稿一覧
+        </Heading>
+      </div>
+      <div className="grid gap-8">
+        <PostForm hundleSubmit={mutate} />
+        <PostList posts={posts} />
+        <div ref={ref}>
+          {!isReachingEnd ? <Loading /> : "すべて読み込みました。"}
+          {isEmpty ? "取得するデータはありませんでした。" : null}
+        </div>
+      </div>
+    </>
   );
 }
