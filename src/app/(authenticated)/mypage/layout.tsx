@@ -8,7 +8,9 @@ export default function MainLayout({
 }) {
   return (
     <div className="bg-gray-50 pb-20">
-      <UserTabs />
+      <div className="pt-8">
+        <UserTabs />
+      </div>
       <section className="mt-4">
         <Inner>{children}</Inner>
       </section>
