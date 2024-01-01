@@ -15,7 +15,7 @@ export const SecondTabsComp: React.FC<props> = ({ items }) => {
   const pathname = usePathname();
 
   return (
-    <nav className="pt-8">
+    <nav>
       <Inner>
         <ul className="flex gap-4 font-bold">
           {items.map((item, i) => (
