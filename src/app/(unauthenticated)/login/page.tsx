@@ -1,10 +1,10 @@
 import { Inner } from "@/components/atoms";
 import { Text } from "@/components/atoms";
-import { EngineerDbAboutCtt } from "@/app/(login)/_component/EngineerDbAboutCtt";
+import { EngineerDbAboutCtt } from "@/app/(unauthenticated)/login/_component/EngineerDbAboutCtt";
 import { MotionWhileInView } from "@/components/animation";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { SignOutToast } from "@/app/(login)/_component/SignOutToast";
+import { SignOutToast } from "@/app/(unauthenticated)/login/_component/SignOutToast";
 import { SignInButton } from "@/components/layout/header/nav/SignInButton";
 
 const EngineerDbAboutCttList = [
