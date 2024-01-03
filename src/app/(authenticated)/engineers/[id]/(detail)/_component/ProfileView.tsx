@@ -7,10 +7,8 @@ import {
   OccupationOptions,
   WorkOptions,
   GenderOptions,
-  ExperienceOptions,
-  PrefectureOptions,
 } from "@/lib/ontions";
-import { Link, Span } from "@/components/atoms";
+import { Link } from "@/components/atoms";
 import { formatContent, componentDecorator } from "@/lib/content";
 import Linkify from "react-linkify";
 
@@ -145,7 +143,7 @@ export const ProfileView: React.FC<Props> = ({ user }) => {
   return (
     <div className="grid gap-4 md:grid-cols-2">
       {ProfileList.map((item, index) => (
-        <div key={index}>
+        <div key={index} className="grid gap-1">
           <p className="text-xs font-bold text-slate-500">{item.label}</p>
           <div className="postContent rounded bg-white p-2 text-sm">
             {item.value}
