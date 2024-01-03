@@ -57,3 +57,7 @@ body {
 .postContent a {
   color: #fa802c;
 }
+
+.messageContent a {
+  color: #0000ee;
+}
