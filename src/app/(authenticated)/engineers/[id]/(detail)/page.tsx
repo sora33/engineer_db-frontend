@@ -1,7 +1,6 @@
 import { cookies } from "next/headers";
 import { User } from "@/types/user";
 import { Heading } from "@/components/atoms";
-import { ProfileForm } from "@/app/(authenticated)/mypage/(detail)/_component/ProfileForm";
 import { ProfileView } from "@/app/(authenticated)/engineers/[id]/(detail)/_component/ProfileView";
 export default async function Page({ params }: { params: { id: string } }) {
   const token = cookies().get("next-auth.session-token")?.value;

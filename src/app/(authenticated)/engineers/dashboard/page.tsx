@@ -19,6 +19,7 @@ export default async function Page() {
     }
   );
   const data: DashBoard = await res.json();
+  // console.log(data);
 
   return (
     <>

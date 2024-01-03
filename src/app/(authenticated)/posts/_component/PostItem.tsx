@@ -7,6 +7,7 @@ import { useState } from "react";
 import { PostDelete } from "@/app/(authenticated)/posts/_component/PostDelete";
 import { formatDateTime } from "@/lib/date";
 import { formatContent, componentDecorator } from "@/lib/content";
+import { Link } from "@/components/atoms";
 
 type Props = {
   post: Post;
@@ -28,7 +29,7 @@ export const PostItem: React.FC<Props> = ({ post }) => {
       className="grid gap-2 rounded bg-white p-4 text-[14px] shadow"
     >
       <div className="flex gap-4">
-        <a href={`/engineers/${post.user.id}`}>
+        <Link href={`/engineers/${post.user.id}`}>
           <Avatar className="cursor-pointer">
             <AvatarImage
               src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${post.user.avatar}`}
@@ -37,7 +38,7 @@ export const PostItem: React.FC<Props> = ({ post }) => {
               {post.user.name?.substring(0, 2) || ""}
             </AvatarFallback>
           </Avatar>
-        </a>
+        </Link>
         <div className="w-full">
           <div className="flex w-full">
             <p className="mr-4 font-bold">{post.user.name}</p>

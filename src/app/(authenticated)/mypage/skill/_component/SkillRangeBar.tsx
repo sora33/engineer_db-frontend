@@ -35,13 +35,16 @@ export const SkillRangeBar: React.FC<Props> = ({
             Number(form.watch(skill.value as keyof FormSchemaType) || 0) >=
             filterNumber
         );
+  const isEnpty = filteredSkillList.length === 0;
+  if (isEnpty) {
+    return null;
+  }
 
   return (
     <section>
       <Heading as="h2">{title}</Heading>
       <div className="relative overflow-x-auto md:rounded-lg md:p-4 md:shadow-md">
         <div className="flex py-2 text-xs font-bold text-slate-600 sm:text-sm">
-          <div className="w-48 sm:w-60"></div>
           <div className="flex w-full justify-between pr-4">
             {["未経験", "", "", "Lv.3", "", "Lv.5", "", "Lv.7"].map(
               (value, i) => (

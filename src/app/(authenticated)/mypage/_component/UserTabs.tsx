@@ -30,5 +30,12 @@ export const UserTabs: React.FC<Props> = ({ variant = "mypage" }) => {
     },
   ];
 
+  if (variant === "engineer") {
+    UserTabsItems.push({
+      link: `/messages/${id}`,
+      name: "Message",
+    });
+  }
+
   return <SecondTabsComp items={UserTabsItems} />;
 };

@@ -69,8 +69,13 @@ export default function Page() {
         <PostForm hundleSubmit={mutate} />
         <PostList posts={posts} />
         <div ref={ref}>
-          {!isReachingEnd ? <Loading /> : "すべて読み込みました。"}
-          {isEmpty ? "取得するデータはありませんでした。" : null}
+          {isEmpty ? (
+            "取得できるデータはありません。"
+          ) : !isReachingEnd ? (
+            <Loading />
+          ) : (
+            "すべて読み込みました。"
+          )}
         </div>
       </div>
     </>

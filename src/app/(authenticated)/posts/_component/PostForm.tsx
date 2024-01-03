@@ -43,7 +43,6 @@ export const PostForm: React.FC<Props> = ({ hundleSubmit }) => {
       toast({ title: "更新できました。", type: "success" });
       form.setValue("content", "");
       hundleSubmit();
-      setIsShowDisplay(false);
     } catch (error) {
       toast({ title: "エラーが発生しました", type: "error" });
     }
@@ -57,14 +56,7 @@ export const PostForm: React.FC<Props> = ({ hundleSubmit }) => {
   };
   return (
     <>
-      <span
-        className="fixed bottom-4 right-4 z-50 cursor-pointer rounded-full bg-teal-500/90 px-4 py-2 text-sm text-white transition-all hover:bg-teal-600/100
-          md:bottom-8 md:right-8 xl:bottom-20 xl:right-20"
-        onClick={hundleClick}
-      >
-        {isShowDisplay ? "投稿を閉じる" : "投稿フォーム"}
-      </span>
-      {isShowDisplay && (
+      {isShowDisplay ? (
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
             <FormField
@@ -100,6 +92,13 @@ export const PostForm: React.FC<Props> = ({ hundleSubmit }) => {
             </div>
           </form>
         </Form>
+      ) : (
+        <button
+          className="z-50 cursor-pointer rounded-full bg-teal-500/90 px-4 py-2 text-sm text-white transition-all hover:bg-teal-600/100"
+          onClick={hundleClick}
+        >
+          投稿フォームを開く
+        </button>
       )}
     </>
   );
