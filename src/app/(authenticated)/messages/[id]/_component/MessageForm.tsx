@@ -58,10 +58,7 @@ export const MessageForm: React.FC<Props> = ({ setFormInput }) => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Textarea
-                    placeholder="〇〇な人を募集しています〜！〇〇をリリースします〜！！https://example.com"
-                    {...field}
-                  />
+                  <Textarea placeholder="はじめまして、" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
