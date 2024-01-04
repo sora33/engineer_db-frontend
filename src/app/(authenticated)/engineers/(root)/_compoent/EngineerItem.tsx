@@ -31,12 +31,16 @@ export const EngineerItem: React.FC<Props> = ({ user }) => {
         <CardTitle className="flex items-center gap-4">
           <Avatar className="cursor-pointer">
             <AvatarImage
-              src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${user?.avatar}`}
+              src={
+                user?.avatar
+                  ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/${user?.avatar}`
+                  : ""
+              }
             />
             <AvatarFallback>{user?.name?.substring(0, 1) || ""}</AvatarFallback>
           </Avatar>
           <span>{user?.name}</span>
-          <span className="text-muted-foreground ml-auto text-sm font-normal">
+          <span className="text-muted-foreground ml-auto text-xs">
             最終ログイン：{formatTimeAgo(user.lastSignInAt)}
           </span>
         </CardTitle>
@@ -57,7 +61,7 @@ export const EngineerItem: React.FC<Props> = ({ user }) => {
       </CardHeader>
       <CardContent>
         <p className="pb-1">{user.comment}</p>
-        <div className="text-sm">
+        <div className="text-xs">
           <p>
             {user.hobby ? (
               <>
