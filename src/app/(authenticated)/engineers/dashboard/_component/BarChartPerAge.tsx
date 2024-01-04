@@ -40,7 +40,7 @@ export const BarChartPerAge: React.FC<Props> = ({ ageDistribution }) => {
   ];
   return (
     <Card className="mx-auto max-w-2xl p-8">
-      <Title>年齢別の利用者数</Title>
+      <Title className="!text-base">年齢別の利用者数</Title>
       <BarChart
         className="mt-6"
         data={chartdata}

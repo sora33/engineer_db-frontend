@@ -5,9 +5,12 @@ import { useIntersection } from "@/app/(authenticated)/posts/_component/useInter
 import { Post } from "@/types/post";
 import { PostForm } from "@/app/(authenticated)/posts/_component/PostForm";
 import { PostList } from "@/app/(authenticated)/posts/_component/PostList";
-import { Heading, Loading } from "@/components/atoms";
+import { Heading, Loading, Description } from "@/components/atoms";
+import { PostItemSkeleton } from "@/app/(authenticated)/posts/_component/PostItemSkeleton";
+import { useCurrentUser } from "@/app/(authenticated)/_component/UserContext";
 
 export default function Page() {
+  const { currentUser } = useCurrentUser();
   // トリガーのdiv要素への参照
   const ref = useRef<HTMLDivElement>(
     null
@@ -19,9 +22,7 @@ export default function Page() {
   const getKey = (pageIndex: number, previousPageData: Post[]) => {
     if (previousPageData && !previousPageData.length) return null;
     // pageIndexは0からのため+1をしてpageIndexを1からにする
-    return `/api/users/${localStorage.getItem("userId")}/posts?page=${
-      pageIndex + 1
-    }`;
+    return `/api/users/${currentUser?.id}/posts?page=${pageIndex + 1}`;
   };
   // fetch　を使用してデータを取得
   const {
@@ -60,25 +61,33 @@ export default function Page() {
   }, [intersection, isReachingEnd, getPosts, isValidating]);
 
   if (error) return "failed to load";
-  if (!postList) return <Loading />;
 
   // 一覧表示でデータを扱いやすいように整形
-  const posts = postList.flat();
+  // const posts = postList.flat();
 
   return (
     <>
       <div className="pb-4">
-        <Heading as="h1" size="lg">
+        <Heading as="h1" size="md">
           投稿一覧
         </Heading>
+        <Description>
+          自分のアピール、イベント告知、求人などを投稿できます。
+        </Description>
       </div>
       <div className="grid gap-8">
         <PostForm hundleSubmit={mutate} />
-        <PostList posts={posts} />
-        <div ref={ref}>
-          {!isReachingEnd ? <Loading /> : "すべて読み込みました。"}
-          {isEmpty ? "取得するデータはありませんでした。" : null}
-        </div>
+        {postList ? (
+          <>
+            <PostList posts={postList.flat()} />
+            <div ref={ref}>
+              {!isReachingEnd ? <Loading /> : "すべて読み込みました。"}
+              {isEmpty ? "取得するデータはありませんでした。" : null}
+            </div>
+          </>
+        ) : (
+          Array.from({ length: 4 }).map((_, i) => <PostItemSkeleton key={i} />)
+        )}
       </div>
     </>
   );

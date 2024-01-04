@@ -33,7 +33,11 @@ export default async function MainLayout({ children, params }: Props) {
           <div className="flex items-center">
             <Avatar className="mr-2">
               <AvatarImage
-                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${user?.avatar}`}
+                src={
+                  user?.avatar
+                    ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/${user?.avatar}`
+                    : ""
+                }
               />
               <AvatarFallback>
                 {user?.name?.substring(0, 1) || ""}

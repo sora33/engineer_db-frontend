@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { User } from "@/types/user";
-import { Heading } from "@/components/atoms";
+import { Description, Heading } from "@/components/atoms";
 import { ProfileForm } from "@/app/(authenticated)/mypage/(detail)/_component/ProfileForm";
 import { useCurrentUserId } from "@/app/(authenticated)/_component/useCurrentUserId";
 import { ProfileDialog } from "@/app/(authenticated)/mypage/(detail)/_component/ProfileDialog";
@@ -22,9 +22,12 @@ export default async function Page() {
   return (
     <>
       <div className="pb-4">
-        <Heading as="h1" size="lg">
+        <Heading as="h1" size="md">
           プロフィール
         </Heading>
+        <Description>
+          プロフィールが充実していた方が、ユーザーの関心が高まります。
+        </Description>
       </div>
       <ProfileForm user={user} />
       <ProfileDialog nullCount={nullCount} />

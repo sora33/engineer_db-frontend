@@ -143,7 +143,7 @@ export const ProfileView: React.FC<Props> = ({ user }) => {
   return (
     <div className="grid gap-4 md:grid-cols-2">
       {ProfileList.map((item, index) => (
-        <div key={index} className="grid gap-1">
+        <div key={index} className="grid content-start gap-1">
           <p className="text-xs font-bold text-slate-500">{item.label}</p>
           <div className="postContent rounded bg-white p-2 text-sm">
             {item.value}

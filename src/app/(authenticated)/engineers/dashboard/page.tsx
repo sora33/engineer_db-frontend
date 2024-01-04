@@ -1,4 +1,4 @@
-import { Heading, LinkText } from "@/components/atoms";
+import { Heading, LinkText, Description } from "@/components/atoms";
 import { AreaChartUsers } from "@/app/(authenticated)/engineers/dashboard/_component/AreaChartUsers";
 import { BarChartPerAge } from "@/app/(authenticated)/engineers/dashboard/_component/BarChartPerAge";
 import { DonutChartPurpose } from "@/app/(authenticated)/engineers/dashboard/_component/DonutChartPurpose";
@@ -25,12 +25,17 @@ export default async function Page() {
     <>
       <div className="grid gap-8 pb-4">
         <section>
+          <LinkText className="text-sm text-orange-500" href="/engineers">
+            「エンジニア一覧（検索）」はこちら
+          </LinkText>
           <Heading as="h2" size="md">
             ダッシュボード
           </Heading>
-          <LinkText className="text-orange-500" href="/engineers">
-            「エンジニアを検索」はこちら
-          </LinkText>
+          <Description className="text-sm">
+            エンジニアの属性を集計したダッシュボードです。エンジニアの属性を知りたいときにご活用ください。
+            <br />
+            「こんなデータがあったら面白い！」というアイデアがあれば、ぜひご連絡お待ちしております🙇‍♂️
+          </Description>
           <div className="mt-4 grid gap-4 lg:grid-cols-3">
             <DonutChartPurpose
               purposeDistribution={data.purpose_distribution}

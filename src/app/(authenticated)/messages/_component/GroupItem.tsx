@@ -47,7 +47,11 @@ export const GroupItem: React.FC<Props> = ({ user }) => {
           }}
         >
           <AvatarImage
-            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${user.avatar}`}
+            src={
+              user?.avatar
+                ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/${user.avatar}`
+                : ""
+            }
           />
           <AvatarFallback>{user.name?.substring(0, 2) || ""}</AvatarFallback>
         </Avatar>

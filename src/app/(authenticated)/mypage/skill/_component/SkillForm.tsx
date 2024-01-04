@@ -19,6 +19,7 @@ import {
 } from "@/lib/ontions";
 import { FileterSelect } from "@/app/(authenticated)/mypage/skill/_component/FileterSelect";
 import { useToast } from "@/providers/ToastProvider";
+import { useCurrentUser } from "@/app/(authenticated)/_component/UserContext";
 
 let FormSchema = z.object({});
 SKILL_LIST.forEach((skill) => {
@@ -35,15 +36,17 @@ type Props = {
   isView?: boolean;
 };
 
-const userId = localStorage.getItem("userId");
-
 export const SkillForm: React.FC<Props> = ({ skills, isView = false }) => {
+  const { currentUser } = useCurrentUser();
+  const userId = currentUser?.id;
   const [filter, setFilter] = useState(isView ? "1" : "0");
+  const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
   const defaultValues = SKILL_LIST.reduce((values, skill) => {
-    const foundSkill = skills
-      ? skills?.find((s) => s.name === skill.value)
-      : null;
+    const foundSkill =
+      skills && skills.length > 0
+        ? skills?.find((s) => s.name === skill.value)
+        : null;
     return {
       ...values,
       [skill.value]: foundSkill ? foundSkill.level : 0,
@@ -68,6 +71,7 @@ export const SkillForm: React.FC<Props> = ({ skills, isView = false }) => {
       name,
       level,
     }));
+    setIsLoading(true);
     try {
       await fetch("/api/skills", {
         method: "PUT",
@@ -79,6 +83,8 @@ export const SkillForm: React.FC<Props> = ({ skills, isView = false }) => {
       toast({ title: "更新できました。", type: "success" });
     } catch (error) {
       toast({ title: "エラーが発生しました", type: "error" });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -135,6 +141,7 @@ export const SkillForm: React.FC<Props> = ({ skills, isView = false }) => {
             className="mx-auto mt-4 w-full max-w-md"
             type="submit"
             onClick={() => form.formState.isSubmitting}
+            isLoading={isLoading}
           >
             更新
           </Button>

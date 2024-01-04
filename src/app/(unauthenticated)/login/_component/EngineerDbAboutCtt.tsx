@@ -3,7 +3,7 @@ import { Image, Text } from "@/components/atoms";
 type props = {
   index: number;
   title: string;
-  description: string;
+  description: React.ReactNode;
   imageAlt: string;
 };
 
@@ -22,7 +22,9 @@ export const EngineerDbAboutCtt: React.FC<props> = ({
           </span>
           {title}
         </h3>
-        <Text className="mt-4">{description}</Text>
+        <Text size="sm" className="mt-4">
+          {description}
+        </Text>
       </div>
       <div className="ml-auto mt-4 w-full px-4 md:w-6/12 md:px-16">
         <Image

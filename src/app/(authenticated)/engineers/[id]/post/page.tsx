@@ -5,7 +5,8 @@ import { useIntersection } from "@/app/(authenticated)/posts/_component/useInter
 import { Post } from "@/types/post";
 import { PostList } from "@/app/(authenticated)/posts/_component/PostList";
 import { useParams } from "next/navigation";
-import { Heading } from "@/components/atoms";
+import { Heading, Loading } from "@/components/atoms";
+import { PostItemSkeleton } from "@/app/(authenticated)/posts/_component/PostItemSkeleton";
 
 export default function Page() {
   const { id } = useParams();
@@ -59,24 +60,34 @@ export default function Page() {
   }, [intersection, isReachingEnd, getPosts, isValidating]);
 
   if (error) return "failed to load";
-  if (!postList) return "loading...";
 
-  // 一覧表示でデータを扱いやすいように整形
-  const posts = postList.flat();
+  // // 一覧表示でデータを扱いやすいように整形
+  // const posts = postList.flat();
 
   return (
     <>
       <div className="pb-4">
-        <Heading as="h1" size="lg">
+        <Heading as="h1" size="md">
           投稿一覧
         </Heading>
       </div>
       <div className="grid gap-8">
-        <PostList posts={posts} />
-        <div ref={ref}>
-          {!isReachingEnd ? "loading..." : "すべて読み込みました。"}
-          {isEmpty ? "取得するデータはありませんでした。" : null}
-        </div>
+        {postList ? (
+          <>
+            <PostList posts={postList.flat()} />
+            <div ref={ref}>
+              {isEmpty ? (
+                "投稿がありません。"
+              ) : !isReachingEnd ? (
+                <Loading />
+              ) : (
+                "すべて読み込みました。"
+              )}
+            </div>
+          </>
+        ) : (
+          Array.from({ length: 4 }).map((_, i) => <PostItemSkeleton key={i} />)
+        )}
       </div>
     </>
   );

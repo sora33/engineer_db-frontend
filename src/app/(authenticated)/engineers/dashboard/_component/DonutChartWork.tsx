@@ -33,7 +33,7 @@ export const DonutChartWork: React.FC<Props> = ({ workDistribution }) => {
 
   return (
     <Card className="mx-auto max-w-2xl p-8">
-      <Title>働き方</Title>
+      <Title className="!text-base">働き方</Title>
       <DonutChart
         className="mt-6"
         data={cities}

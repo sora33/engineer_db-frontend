@@ -8,18 +8,34 @@ import { SignInButton } from "@/components/layout/header/nav/SignInButton";
 const EngineerDbAboutCttList = [
   {
     title: "データを蓄積",
-    description: "サービスの利用者のデータを、エンジニアDBに蓄積します。",
-    imageAlt: "エンジニアDBにデータが蓄積される様子",
+    description: (
+      <>
+        「えんじにあDB」に登録し、プロフィールプロフィール情報をご登録ください。ユーザー様自身が「えんじにあDB」の一部になるのです。
+      </>
+    ),
+    imageAlt: "「えんじにあDB」にデータが蓄積される様子",
   },
   {
     title: "エンジニアを探す",
-    description: "エンジニアDBを通して、エンジニアや企業とマッチングできます。",
-    imageAlt: "エンジニアDBでエンジニアを探す様子",
+    description: (
+      <>
+        「えんじにあDB」を通して、エンジニアや企業と新しい出会いを見つけてください。
+        <br />
+        「えんじにあDB」では、ユーザー様にご登録いただいたデータを、ユーザー様みんなで共有することを目的としています。
+      </>
+    ),
+    imageAlt: "「えんじにあDB」でエンジニアを探す様子",
   },
   {
     title: "データの可視化・活用",
-    description: "エンジニアDBのデータを分析し、効率的に共有します。",
-    imageAlt: "エンジニアDBにデータが蓄積される様子",
+    description: (
+      <>
+        「えんじにあDB」のデータを分析し、効率的に共有します。
+        <br />
+        ユーザー様のデータの価値を最大限引き出した上で、ユーザー様に還元します。
+      </>
+    ),
+    imageAlt: "「えんじにあDB」にデータが蓄積される様子",
   },
 ];
 
@@ -36,15 +52,15 @@ export default async function Page() {
               </h1>
             </MotionWhileInView>
             <MotionWhileInView duration={0.5}>
-              <Text className="mt-8 font-bold">
+              <Text size="sm" className="mt-8 font-bold">
                 仲間も仕事も情熱も、ここでつながる。
               </Text>
-              <Text className="mt-4">
-                全国のエンジニアデータを民主化し、データを共有・活用するサービスです。
+              <Text size="sm" className="mt-4">
+                エンジニアユーザーが集まり、人や仕事に出会えるサービスです。
                 <br />
-                仕事目的、交流目的など、それぞれの目的に合わせてご利用頂けます。
+                交流目的、仕事目的など、それぞれの目的に合わせてご利用頂けます。
               </Text>
-              <Text className="mt-4">
+              <Text size="sm" className="mt-4">
                 Githubでログインできますので、お気軽にご利用ください。
               </Text>
             </MotionWhileInView>
@@ -76,17 +92,7 @@ export default async function Page() {
             </h2>
             <div className="pb-12">
               <p className="mb-4">
-                本サービスのログインは、Githubアカウントのみをご利用いただけます。
-                <br />
-                もっとログイン方法を増やしてほしい旨の要望は、
-                <a
-                  className="text-orange-500 hover:underline"
-                  href="https://forms.gle/aeBUs6YQSRNgTaqz8"
-                  target="_blank"
-                >
-                  こちら
-                </a>
-                よりお問い合わせお願いいたします。
+                現在、ログイン方法は、Github連携のみとなっております。
               </p>
               <SignInButton />
             </div>

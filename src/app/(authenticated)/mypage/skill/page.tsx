@@ -19,7 +19,7 @@ export default async function Page() {
   return (
     <>
       <div className="pb-4">
-        <Heading as="h1" size="lg">
+        <Heading as="h1" size="md">
           スキルレベル
         </Heading>
         <SkillExplain />
