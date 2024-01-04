@@ -16,14 +16,14 @@ export const MainTabsComp: React.FC<props> = ({ items }) => {
 
   return (
     <>
-      <nav className="sticky top-0 z-10 bg-white">
+      <nav className="md:py0 fixed bottom-0 z-40 w-full bg-white py-1 md:sticky md:top-0">
         <Inner size="lg">
           <ul className="flex gap-x-6 font-bold">
             {items.map((item) => (
               <li key={item.name} className="">
                 <Link
                   href={item.link}
-                  className={`inline-block py-1 text-gray-500 hover:text-gray-900
+                  className={`inline-block pb-1 pt-2 text-gray-500 hover:text-gray-900
                   ${
                     pathname.includes(item.link)
                       ? "border-b-2 border-gray-900 text-gray-900"

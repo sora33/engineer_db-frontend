@@ -4,8 +4,11 @@ import { Button } from "@/components/ui/button";
 
 export const SignInButton = () => {
   return (
-    <Button onClick={() => signIn("github", { callbackUrl: "/mypage" })}>
-      Githubでログインする
+    <Button
+      className="bg-[#333] text-white hover:bg-[#444]"
+      onClick={() => signIn("github", { callbackUrl: "/mypage" })}
+    >
+      Github ログイン
     </Button>
   );
 };
