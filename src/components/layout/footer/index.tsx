@@ -10,7 +10,6 @@ export const FooterNavList = [
     isExternal: true,
   },
   { name: "プライバシーポリシー", href: "/policy", isExternal: false },
-  { name: "開発者について", href: "/about", isExternal: false },
   {
     name: "開発者の「X」",
     href: "https://twitter.com/koocookooc",
