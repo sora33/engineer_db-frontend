@@ -49,7 +49,7 @@ export const PostDelete: React.FC<Props> = ({
         <DialogHeader>
           <DialogTitle>本当に削除してよろしいですか？</DialogTitle>
           <DialogDescription>
-            <div className="mt-4 grid grid-cols-2 gap-2">
+            <div className="mt-4 grid grid-cols-2 gap-4">
               <Button variant="outline" onClick={() => setIsShowDialog(false)}>
                 キャンセル
               </Button>

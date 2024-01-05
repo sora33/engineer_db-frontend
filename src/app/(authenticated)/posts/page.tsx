@@ -6,6 +6,7 @@ import { Post } from "@/types/post";
 import { PostForm } from "@/app/(authenticated)/posts/_component/PostForm";
 import { PostList } from "@/app/(authenticated)/posts/_component/PostList";
 import { Loading } from "@/components/atoms";
+import { PostItemSkeleton } from "@/app/(authenticated)/posts/_component/PostItemSkeleton";
 
 export default function Page() {
   // トリガーのdiv要素への参照
@@ -58,25 +59,30 @@ export default function Page() {
   }, [intersection, isReachingEnd, getPosts, isValidating]);
 
   if (error) return "failed to load";
-  if (!postList) return <Loading />;
 
   // 一覧表示でデータを扱いやすいように整形
-  const posts = postList.flat();
+  // const posts = postList.flat();
 
   return (
     <>
-      <div className="grid gap-8">
+      <div className="grid w-full gap-8">
         <PostForm hundleSubmit={mutate} />
-        <PostList posts={posts} />
-        <div ref={ref}>
-          {isEmpty ? (
-            "取得できるデータはありません。"
-          ) : !isReachingEnd ? (
-            <Loading />
-          ) : (
-            "すべて読み込みました。"
-          )}
-        </div>
+        {postList ? (
+          <>
+            <PostList posts={postList.flat()} />
+            <div ref={ref}>
+              {isEmpty ? (
+                "取得できるデータはありません。"
+              ) : !isReachingEnd ? (
+                <Loading />
+              ) : (
+                "すべて読み込みました。"
+              )}
+            </div>
+          </>
+        ) : (
+          Array.from({ length: 4 }).map((_, i) => <PostItemSkeleton key={i} />)
+        )}
       </div>
     </>
   );
