@@ -1,4 +1,4 @@
-import { Heading, LinkText, Loading } from "@/components/atoms";
+import { Heading, LinkText, Description } from "@/components/atoms";
 import { SearchForm } from "@/app/(authenticated)/engineers/(root)/_compoent/SearchForm";
 import { cookies } from "next/headers";
 import { User } from "@/types/user";
@@ -20,13 +20,19 @@ export default async function Page({ searchParams }: { searchParams: string }) {
   return (
     <>
       <div className="grid gap-8 pb-4">
-        <section>
-          <Heading as="h1" size="md">
-            エンジニアを検索
-          </Heading>
-          <LinkText className="text-orange-500" href="/engineers/dashboard">
-            「エンジニアのダッシュボード」はこちら
+        <section className="w-full">
+          <LinkText
+            className="text-sm text-orange-500"
+            href="/engineers/dashboard"
+          >
+            「エンジニアの集計ダッシュボード」はこちら
           </LinkText>
+          <Heading as="h1" size="md">
+            エンジニア一覧（検索）
+          </Heading>
+          <Description className="text-sm">
+            あなたが求めるエンジニアを探してみましょう。
+          </Description>
         </section>
         <div>
           <SearchForm users={users} totalCount={totalCount} />

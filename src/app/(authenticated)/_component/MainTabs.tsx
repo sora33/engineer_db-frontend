@@ -1,10 +1,6 @@
 import { MainTabsComp } from "@/components/layout/tabs/MainTabsComp";
-import { getServerSession } from "next-auth";
-import { nextAuthOption, CustomSession } from "@/lib/nextAuthOption";
 
 export const MainTabs = async () => {
-  const session: CustomSession | null = await getServerSession(nextAuthOption);
-  const id = session?.user?.providerUserId;
   const MainTabsItems = [
     {
       link: `/engineers`,

@@ -3,19 +3,14 @@ import { formatDateTime } from "@/lib/date";
 import { formatContent, componentDecorator } from "@/lib/content";
 import Linkify from "react-linkify";
 import { Message } from "@/types/message";
-import { useState } from "react";
+import { useCurrentUser } from "@/app/(authenticated)/_component/UserContext";
 type Props = {
   message: Message;
 };
 
 export const MessageItem: React.FC<Props> = ({ message }) => {
-  const [isMyNotRead, setIsMyNotRead] = useState(
-    message?.isRead === false &&
-      message.userId != localStorage.getItem("userId")
-  );
-
-  const currentUserId = localStorage.getItem("userId");
-  const isMyMessage = message.userId == currentUserId;
+  const { currentUser } = useCurrentUser();
+  const isMyMessage = message.userId == currentUser?.id;
 
   return (
     <div

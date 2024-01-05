@@ -69,6 +69,18 @@ export const ExperienceOptions = [
   { label: "40年", value: "40" },
 ];
 
+const foreignCountryOptions = {
+  name: "海外",
+  options: [
+    "アジア",
+    "アフリカ",
+    "ヨーロッパ",
+    "北アメリカ",
+    "南アメリカ",
+    "オセアニア",
+  ],
+};
+
 const Prefecture1Options = {
   name: "北海道・東北",
   options: [
@@ -158,6 +170,7 @@ export const PrefectureOptions = [
   Prefecture4Options,
   Prefecture5Options,
   Prefecture6Options,
+  foreignCountryOptions,
 ];
 
 export const PROJECT_SKILL_LIST = [

@@ -9,9 +9,9 @@ import {
 } from "@/components/ui/dialog";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 import { useToast } from "@/providers/ToastProvider";
 import { signOut } from "next-auth/react";
+import { useCurrentUser } from "@/app/(authenticated)/_component/UserContext";
 
 type Props = {};
 
@@ -19,13 +19,12 @@ export const QuitDialog: React.FC<Props> = ({}) => {
   const [isShow, setIsShow] = useState(false);
   const toast = useToast();
   const [isLoading, setIsLoading] = useState(false);
-
-  const router = useRouter();
+  const { currentUser, setCurrentUser } = useCurrentUser();
 
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
-      await fetch(`/api/users/${localStorage.getItem("userId")}`, {
+      await fetch(`/api/users/${currentUser?.id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -37,6 +36,7 @@ export const QuitDialog: React.FC<Props> = ({}) => {
         type: "success",
       });
       await signOut({ callbackUrl: "/" });
+      setCurrentUser(null);
     } catch (error) {
       toast({ title: "エラーが発生しました", type: "error" });
     } finally {

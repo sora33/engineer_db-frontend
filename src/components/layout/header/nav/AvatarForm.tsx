@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { useState, useRef } from "react";
 import { useToast } from "@/providers/ToastProvider";
 import imageCompression from "browser-image-compression";
+import { useCurrentUser } from "@/app/(authenticated)/_component/UserContext";
 
 type Props = {
   isShowDialog: boolean;
@@ -21,6 +22,7 @@ export const AvatarForm: React.FC<Props> = ({
   isShowDialog,
   setIsShowDialog,
 }) => {
+  const { setCurrentUser } = useCurrentUser();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -68,7 +70,16 @@ export const AvatarForm: React.FC<Props> = ({
       });
       const resData = await res.json();
       const resAvatar = resData.avatar;
-      localStorage.setItem("userAvatar", resAvatar ?? "");
+      setCurrentUser((prev) => {
+        if (prev) {
+          return {
+            ...prev,
+            avatar: resAvatar ?? "",
+          };
+        }
+        return null;
+      });
+
       toast({ title: "更新できました。", type: "success" });
       setIsShowDialog(false);
       location.reload();

@@ -41,7 +41,7 @@ export const DonutChartOccupation: React.FC<Props> = ({
   ];
   return (
     <Card className="mx-auto max-w-2xl p-8">
-      <Title>職種</Title>
+      <Title className="!text-base">職種</Title>
       <DonutChart
         className="mt-6"
         data={cities}

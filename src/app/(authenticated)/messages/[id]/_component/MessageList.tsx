@@ -27,6 +27,7 @@ export const MessageList: React.FC<Props> = ({ messages }) => {
       <div ref={formRef}>
         <MessageForm setFormInput={setMessageList} />
       </div>
+      <p className="mt-12 font-bold md:hidden">メッセージ一覧</p>
     </>
   );
 };

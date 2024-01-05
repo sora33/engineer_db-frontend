@@ -4,10 +4,14 @@
 
 - NextJS 13
 - CSS
-  - TailwindCSS
-  - Tailwind Variants
-  - shadcn/ui
-  - tremor
+  - [TailwindCSS](https://tailwindcss.com/)
+  - [Tailwind Variants](https://www.tailwind-variants.org/)
+  - [shadcn/ui](https://ui.shadcn.com/)
+  - [tremor](https://www.tremor.so/)
+- markdown
+  - [react-md-editor](https://uiwjs.github.io/react-md-editor)
+  - [セキュリティ sanitizer](https://github.com/rehypejs/rehype-sanitize)
+  - ![サニタイズできてるっぽい](image.png)
 
 ## 環境変数
 
@@ -38,3 +42,50 @@ NEXT_PUBLIC_BACKEND_URL=http://localhost:3000
 - 職種の円グラフ
 - 働き方の円グラフ
 - 直近ログインしているエンジニア
+
+## テスト
+
+- トレードオフの観点でバランスのよい結合テストを厚めに書く
+- E2E テストは、課金導線やタイムラインなどの、不具合が発生するとビジネス上のネガティブインパクトの大きい箇所だけ書く
+- 単体テストは、明らかにテストしなくても自明なロジックに対しては書かない。複雑性が高いビジネスロジックの関数に関しては書く
+- 静的テストはベースラインとして必ず引く。導入が後回しになればなるほど導入コストが跳ね上がるので、プロジェクトの最初に必ず入れる
+  参照
+
+- [フロントエンドのテスト戦略について考える](https://zenn.dev/koki_tech/articles/a96e58695540a7)
+
+### フロントエンド
+
+#### 静的解析
+
+最低限必要。プロダクト開始前に設定すべきもの。
+
+- [ESLint](https://eslint.org/)
+- [Pretiier](https://prettier.io/)
+
+#### 単体テスト
+
+ここは浅めでも良い。
+
+- [Jest](https://jestjs.io/ja/)
+
+#### 結合テスト
+
+ここは厚めにする。
+
+- [Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+
+#### E2E テスト
+
+- 実装、実行、メンテナンスにかかるコストが大きいかった + 個人開発ということもあり、目視のゴリ押しです。
+
+#### パフォーマンス、アクセシビリティのテスト
+
+### バックエンド
+
+#### 静的解析
+
+#### 単体テスト
+
+#### 結合テスト
+
+サービスに登録しているだけで、

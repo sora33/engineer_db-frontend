@@ -18,7 +18,6 @@ export default async function Page({ params }: { params: { id: string } }) {
   );
   const data: data = await res.json();
 
-  console.log(data);
   return (
     <>
       <div className="grid gap-8">

@@ -74,7 +74,6 @@ export const ProfileForm: React.FC<Props> = ({ user }) => {
   });
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    console.log(data);
     try {
       await fetch("/api/users", {
         method: "PUT",

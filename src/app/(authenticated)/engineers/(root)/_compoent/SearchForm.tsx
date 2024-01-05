@@ -41,7 +41,10 @@ export const SearchForm: React.FC<Props> = ({ users, totalCount }) => {
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get("page")) || 1;
 
-  const [isSerchFormShow, setIsSerchFormShow] = useState(true);
+  const params = new URLSearchParams(searchParams.toString());
+  params.delete("page");
+  const paramsWithoutPage = params.toString();
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -64,81 +67,72 @@ export const SearchForm: React.FC<Props> = ({ users, totalCount }) => {
   };
   return (
     <>
-      <div>
-        <button
-          className="cursor-pointer text-sm text-orange-500 hover:underline"
-          onClick={() => setIsSerchFormShow((prev) => !prev)}
-        >
-          {isSerchFormShow ? "検索条件を隠す" : "検索条件を表示"}
-        </button>
-      </div>
+      <div></div>
       <section className="grid items-start gap-4 md:flex">
         <Form {...form}>
-          {isSerchFormShow && (
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="grid gap-4 rounded p-4 shadow md:sticky md:top-16 md:w-96"
-            >
-              <Heading as="h2" size="sm">
-                検索条件
-              </Heading>
-              <Tabs defaultValue="basic" className="w-[400px]">
-                <TabsList>
-                  <TabsTrigger value="basic">基本情報</TabsTrigger>
-                  <TabsTrigger value="skill">スキル</TabsTrigger>
-                </TabsList>
-                <TabsContent
-                  value="basic"
-                  className="grid grid-cols-2 gap-2 md:grid-cols-1"
-                >
-                  <CustomSelect
-                    control={form.control}
-                    name="gender"
-                    label="性別"
-                    options={GenderOptions}
-                  />
-                  <CustomSelect
-                    control={form.control}
-                    name="location"
-                    label="所在地"
-                  />
-                  <CustomSelect
-                    control={form.control}
-                    name="purpose"
-                    label="ご利用の目的"
-                    options={PurposeOptions}
-                  />
-                  <CustomSelect
-                    control={form.control}
-                    name="occupation"
-                    label="職種"
-                    options={OccupationOptions}
-                  />
-                  <CustomSelect
-                    control={form.control}
-                    name="work"
-                    label="働き方"
-                    options={WorkOptions}
-                  />
-                </TabsContent>
-                <TabsContent value="skill" className="grid gap-2">
-                  <CustomSelect
-                    control={form.control}
-                    name="skill"
-                    label="スキル種別"
-                    options={GenderOptions}
-                  />
-                  <CustomSelect
-                    control={form.control}
-                    name="skillLevel"
-                    label="スキルレベル"
-                    options={SKILL_FILTER_OPTION}
-                  />
-                </TabsContent>
-              </Tabs>
-              <Button className="w-80">検索</Button>
-            </form>
-          )}
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="grid gap-4 rounded p-2 shadow md:sticky md:top-16 md:w-96 md:p-4"
+          >
+            <Heading as="h2" size="sm">
+              検索条件
+            </Heading>
+            <Tabs defaultValue="basic" className="md:w-[400px]">
+              <TabsList>
+                <TabsTrigger value="basic">基本情報</TabsTrigger>
+                <TabsTrigger value="skill">スキル</TabsTrigger>
+              </TabsList>
+              <TabsContent
+                value="basic"
+                className="grid grid-cols-2 gap-2 md:grid-cols-1"
+              >
+                <CustomSelect
+                  control={form.control}
+                  name="gender"
+                  label="性別"
+                  options={GenderOptions}
+                />
+                <CustomSelect
+                  control={form.control}
+                  name="location"
+                  label="所在地"
+                />
+                <CustomSelect
+                  control={form.control}
+                  name="purpose"
+                  label="ご利用の目的"
+                  options={PurposeOptions}
+                />
+                <CustomSelect
+                  control={form.control}
+                  name="occupation"
+                  label="職種"
+                  options={OccupationOptions}
+                />
+                <CustomSelect
+                  control={form.control}
+                  name="work"
+                  label="働き方"
+                  options={WorkOptions}
+                />
+              </TabsContent>
+              <TabsContent value="skill" className="grid gap-2">
+                <CustomSelect
+                  control={form.control}
+                  name="skill"
+                  label="スキル種別"
+                  options={GenderOptions}
+                />
+                <CustomSelect
+                  control={form.control}
+                  name="skillLevel"
+                  label="スキルレベル"
+                  options={SKILL_FILTER_OPTION}
+                />
+              </TabsContent>
+            </Tabs>
+            <Button className="w-80">検索</Button>
+          </form>
         </Form>
         <div className="flex-1">
           {users ? (
@@ -149,11 +143,12 @@ export const SearchForm: React.FC<Props> = ({ users, totalCount }) => {
                   <SearchPagination
                     totalCount={totalCount}
                     currentPage={currentPage}
+                    paramsWithoutPage={paramsWithoutPage}
                   />
                 </div>
               </>
             ) : (
-              <p className="text-center text-gray-500">
+              <p className="text-center text-sm text-gray-500">
                 0件でした。条件を変えて再度検索してください。
               </p>
             )

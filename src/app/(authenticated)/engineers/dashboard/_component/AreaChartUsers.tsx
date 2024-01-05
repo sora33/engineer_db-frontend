@@ -35,11 +35,11 @@ export const AreaChartUsers = () => {
   return (
     <Card className="relative mx-auto max-w-2xl p-8">
       <div className="absolute inset-0 z-20 flex items-center justify-center rounded bg-slate-500 opacity-50">
-        <p className="bg-white p-2 text-black">
+        <p className="bg-white p-2 text-sm text-black">
           現在、データが少ないので表示できません。
         </p>
       </div>
-      <Title>「エンジニアDB」の利用者数の推移</Title>
+      <Title className="!text-base">「エンジニアDB」の利用者数の推移</Title>
       <AreaChart
         className="mt-4"
         data={chartdata3}

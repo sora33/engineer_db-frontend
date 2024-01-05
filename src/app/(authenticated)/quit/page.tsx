@@ -6,7 +6,7 @@ export default function Page() {
   return (
     <>
       <div className="pb-4">
-        <Heading as="h1" size="lg">
+        <Heading as="h1" size="md">
           退会のお手続き
         </Heading>
         <div className="mt-4 grid gap-2">

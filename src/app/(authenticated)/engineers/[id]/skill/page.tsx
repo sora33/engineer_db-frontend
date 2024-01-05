@@ -17,12 +17,12 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <div className="pb-4">
-        <Heading as="h1" size="lg">
+        <Heading as="h1" size="md">
           スキルレベル
         </Heading>
         <SkillExplain />
       </div>
-      <SkillForm skills={skills} isView={true} />
+      {skills ? <SkillForm skills={skills} isView={true} /> : <p>aaa</p>}
     </>
   );
 }

@@ -1,6 +1,10 @@
 import { UserTabs } from "@/app/(authenticated)/mypage/_component/UserTabs";
 import { Inner } from "@/components/atoms";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "マイページ",
+};
 export default function MainLayout({
   children,
 }: {

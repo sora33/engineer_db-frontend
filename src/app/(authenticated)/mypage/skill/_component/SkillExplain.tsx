@@ -1,9 +1,9 @@
 type Props = {};
 export const SkillExplain: React.FC<Props> = ({}) => {
   return (
-    <>
+    <div className="text-sm">
       <p className="">
-        レベルの概念は、
+        レベルの概念は、下記を参考にしてください。 詳細は、
         <a
           href="https://www.ipa.go.jp/archive/files/000005100.pdf#page=32"
           target="_blank"
@@ -13,21 +13,19 @@ export const SkillExplain: React.FC<Props> = ({}) => {
         </a>
         をご参照ください。
       </p>
-      <p className="text-sm">
-        ・<b>「Lv.3」</b>は、<b>「要求された作業を独力で推進できる」</b>
-        レベルです。<span className="">（参考）2~4年目のエンジニア*</span>
+      <p>
+        ・<b>「Lv.3」</b>は<b>「要求を独力で推進できる自立エンジニア」</b>
+        のレベルです。<span className="">ex. 2~4年目のエンジニア</span>
       </p>
-      <p className="text-sm">
-        ・<b>「Lv.5」</b>
-        は、スキルの専門分野が確立し、<b>「社内のテックリード」</b>
-        レベルです。 <span className="">（参考）4~年目のエンジニア*</span>
+      <p>
+        ・<b>「Lv.5」</b>は<b>「社内のテックリード」</b>
+        で専門分野が確立しているレベルです。
+        <span className="">ex. 4年目~のエンジニア</span>
       </p>
-      <p className="text-sm">
-        ・<b>「Lv.7」</b>
-        は、<b>「世界で通用するプレーヤ」</b>
+      <p>
+        ・<b>「Lv.7」</b>は<b>「世界で通用するエキスパート」</b>
         で最も高いレベルです。
       </p>
-      <p className="text-sm">※ 年数は目安です。</p>
-    </>
+    </div>
   );
 };

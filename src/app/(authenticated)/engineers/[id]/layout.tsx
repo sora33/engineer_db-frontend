@@ -5,9 +5,27 @@ import { User } from "@/types/user";
 import { Metadata } from "next";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-export const metadata: Metadata = {
-  title: "エンジニア",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: {
+    id: string;
+  };
+}): Promise<Metadata> {
+  const token = cookies().get("next-auth.session-token")?.value;
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/users/${params.id}`,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+  const user: User = await res.json();
+  const title = `${user.name}`;
+
+  return {
+    title,
+  };
+}
 
 type Props = {
   children: React.ReactNode;
@@ -22,6 +40,7 @@ export default async function MainLayout({ children, params }: Props) {
     }
   );
   const user: User = await res.json();
+
   return (
     <div className="bg-gray-50 pb-20">
       <Inner>
@@ -33,7 +52,11 @@ export default async function MainLayout({ children, params }: Props) {
           <div className="flex items-center">
             <Avatar className="mr-2">
               <AvatarImage
-                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${user?.avatar}`}
+                src={
+                  user?.avatar
+                    ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/${user?.avatar}`
+                    : ""
+                }
               />
               <AvatarFallback>
                 {user?.name?.substring(0, 1) || ""}

@@ -1,4 +1,5 @@
 export { Text } from "@/components/atoms/text";
+export { Description } from "@/components/atoms/text/Description";
 export { Heading } from "@/components/atoms/heading";
 export { Inner } from "@/components/atoms/inner";
 export { LinkText } from "@/components/atoms/link/LinkText";

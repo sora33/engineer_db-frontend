@@ -15,7 +15,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <div className="pb-4">
-        <Heading as="h1" size="lg">
+        <Heading as="h1" size="md">
           プロフィール
         </Heading>
       </div>

@@ -29,7 +29,7 @@ export const DonutChartPurpose: React.FC<Props> = ({ purposeDistribution }) => {
 
   return (
     <Card className="mx-auto max-w-2xl p-8">
-      <Title>ご利用目的</Title>
+      <Title className="!text-base">ご利用目的</Title>
       <DonutChart
         className="mt-6"
         data={cities}
