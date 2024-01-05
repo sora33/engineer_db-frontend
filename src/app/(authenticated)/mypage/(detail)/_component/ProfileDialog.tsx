@@ -23,7 +23,7 @@ export const ProfileDialog: React.FC<Props> = ({ nullCount }) => {
         <DialogHeader>
           <DialogTitle>プロフィールを登録しましょう！</DialogTitle>
           <DialogDescription>
-            「えんじにあDB」は、お互いのプロフィール情報が豊富な方が、より活発で楽しいコミュニティになると考えています。
+            「エンジニアDB」は、お互いのプロフィール情報が豊富な方が、より活発で楽しいコミュニティになると考えています。
             <br />
             プロフィール情報を充実させて、より多くの出会いに繋げましょう！
             <br />

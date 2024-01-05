@@ -39,7 +39,7 @@ export const AreaChartUsers = () => {
           現在、データが少ないので表示できません。
         </p>
       </div>
-      <Title className="!text-base">「えんじにあDB」の利用者数の推移</Title>
+      <Title className="!text-base">「エンジニアDB」の利用者数の推移</Title>
       <AreaChart
         className="mt-4"
         data={chartdata3}

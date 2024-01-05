@@ -15,7 +15,11 @@ export const FooterNavList = [
     href: "https://twitter.com/koocookooc",
     isExternal: true,
   },
-  { name: "開発の思い", href: "/thoughts", isExternal: false },
+  {
+    name: "技術的なお話",
+    href: "https://qiita.com/hiiragiya",
+    isExternal: true,
+  },
 ];
 
 export const Footer = () => {

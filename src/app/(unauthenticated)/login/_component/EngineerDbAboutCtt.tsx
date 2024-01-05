@@ -14,7 +14,7 @@ export const EngineerDbAboutCtt: React.FC<props> = ({
   imageAlt,
 }) => {
   return (
-    <div className="mt-12 rounded-lg bg-white p-4 shadow-md md:flex md:p-8">
+    <div className="rounded-lg bg-white p-4 py-6 shadow-md md:flex md:p-8">
       <div className="w-full md:w-6/12">
         <h3 className="mb-4 flex items-center text-xl font-semibold">
           <span className="mr-4 flex h-10 w-10 items-center justify-center rounded-full bg-orange-500 text-white">
