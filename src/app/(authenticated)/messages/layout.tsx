@@ -3,6 +3,11 @@ import { cookies } from "next/headers";
 import { User } from "@/types/user";
 import { Message } from "@/types/message";
 import { GroupItem } from "@/app/(authenticated)/messages/_component/GroupItem";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "メッセージ",
+};
 
 export type UserWithLastMessage = User & {
   latestMessage: Message;

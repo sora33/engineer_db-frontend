@@ -2,7 +2,7 @@ import { Inner } from "@/components/atoms";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "エンジニア一覧",
+  title: "ダッシュボード",
 };
 
 export default function MainLayout({

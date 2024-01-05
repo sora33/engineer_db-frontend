@@ -1,5 +1,9 @@
 import { Inner } from "@/components/atoms";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "投稿",
+};
 export default function MainLayout({
   children,
 }: {

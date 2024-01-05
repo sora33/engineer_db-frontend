@@ -4,6 +4,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { NextAuthProvider } from "@/providers/NextAuthProvider";
 import { ToastProvider } from "@/providers/ToastProvider";
+import { CurrentUserProvider } from "@/app/(authenticated)/_component/UserContext";
 
 export const metadata: Metadata = {
   title: {
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
     template: "%s | エンジニアDB",
   },
   description:
-    "エンジニアDBは、エンジニアの情報を交換・交流できるアプリケーションです。",
+    "「エンジニアDB」は、エンジニアがサービスに登録しているだけで、企業やエンジニアとつながる仕組みを目指しています。エンジニアデータを集約し、データを民主化することで、多くのエンジニアがつながれる環境を提供します。",
 };
 
 export default function RootLayout({
@@ -23,11 +24,13 @@ export default function RootLayout({
     <html lang="ja">
       <body className={``}>
         <NextAuthProvider>
-          <ToastProvider>
-            <Header />
-            <main className="">{children}</main>
-            <Footer />
-          </ToastProvider>
+          <CurrentUserProvider>
+            <ToastProvider>
+              <Header />
+              <main className="">{children}</main>
+              <Footer />
+            </ToastProvider>
+          </CurrentUserProvider>
         </NextAuthProvider>
       </body>
     </html>
