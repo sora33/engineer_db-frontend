@@ -18,7 +18,6 @@
 GITHUB_CLIENT_ID=hogehoge
 GITHUB_CLIENT_SECRET=hogehoge
 NEXTAUTH_SECRET=hogehoge
-NEXTAUTH_URL=http://localhost:8000
 NEXT_PUBLIC_BACKEND_URL=http://localhost:3000
 
 ## ポイント
@@ -96,3 +95,5 @@ https://zenn.dev/sora_kumo/articles/8a79531e726b29#storybook-%E3%81%AE%E8%A8%AD%
 この記事では、Storybook の Story をテスト化し、CI に組み込む方法を紹介しました。Play function を利用することで、コンポーネントの外観だけではなく振る舞いまでを Storybook で検証することが可能になります。
 Storybook のテスト化は、Jest+Testing Library を使用してテストを作成するよりも、コンポーネントの実際の振る舞いを理解しやすく、テストが書きやすいと思いました。また、適切にストーリーを作成すれば、コンポーネントの仕様を Storybook だけで共有することが可能となるので、非エンジニアの方との連携がスムーズになるメリットもあるかと思います。
 CI の設定と作成したコンポーネントの Story さえ作成しておけば、レンダリングのエラーを自動的に検出することができるので、この仕組みをプロジェクト初期から組み込むことで、デグレの削減が期待できるのもいいですね。Storybook のテスト化おすすめです！
+
+ビジュアルリグレッションテスト入れてみたいなって思った
