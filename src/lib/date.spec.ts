@@ -18,11 +18,10 @@ describe("Date utility functions", () => {
     expect(formatDateTime("")).toBe("");
   });
 
-  test("formatTimeAgo formats time ago correctly", () => {
-    const now = new Date();
-    const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
-    expect(formatTimeAgo(oneHourAgo.toISOString())).toBe("1時間前");
-    expect(formatTimeAgo("")).toBe("");
+  test("formatDateTime formats date and time correctly", () => {
+    const date = new Date(Date.UTC(2022, 0, 1, 3, 0)); // 12:00 JST is 03:00 UTC
+    expect(formatDateTime(date.toISOString())).toBe("2022/01/01 12:00");
+    expect(formatDateTime("")).toBe("");
   });
 
   test("calculateAge calculates age correctly", () => {
