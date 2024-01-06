@@ -42,10 +42,7 @@ export const AvatarMenu = () => {
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem className="cursor-pointer py-0">
-            <div
-              className="flex py-2"
-              onClick={() => router.push(`/engineers/${currentUser?.id}`)}
-            >
+            <div className="flex py-2" onClick={() => router.push(`/mypage`)}>
               <UserIcon className="mr-2 h-4 w-4" />
               <span>マイページ</span>
             </div>
