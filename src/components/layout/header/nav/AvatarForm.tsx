@@ -12,6 +12,7 @@ import { useState, useRef } from "react";
 import { useToast } from "@/providers/ToastProvider";
 import imageCompression from "browser-image-compression";
 import { useCurrentUser } from "@/app/(authenticated)/_component/UserContext";
+import Image from "next/image";
 
 type Props = {
   isShowDialog: boolean;
@@ -93,7 +94,7 @@ export const AvatarForm: React.FC<Props> = ({
   return (
     <>
       <Dialog open={isShowDialog} onOpenChange={setIsShowDialog}>
-        <DialogContent>
+        <DialogContent className="max-w-[400px]">
           <DialogHeader>
             <DialogTitle className="pb-2">アバター画像を変更</DialogTitle>
             <DialogDescription>
@@ -105,8 +106,16 @@ export const AvatarForm: React.FC<Props> = ({
                   ref={inputRef}
                   onChange={handleFileChange}
                 />
-                <div>
-                  {previewUrl && <img src={previewUrl} alt="プレビュー画像" />}
+                <div className="flex justify-center">
+                  {previewUrl && (
+                    <Image
+                      src={previewUrl}
+                      alt="プレビュー画像"
+                      height={300}
+                      width={400}
+                      className="size-80 object-cover"
+                    />
+                  )}
                 </div>
                 <div className="grid grid-cols-2 gap-2">
                   <Button
