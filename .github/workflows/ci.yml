@@ -26,6 +26,11 @@ jobs:
       - name: Lint with eslint
         run: npm run lint
 
+      - name: Start Storybook
+        run: npm run storybook &
+        env:
+          CI: true
+
       - name: Test Storybook
         run: npm run test-storybook
 
