@@ -1,7 +1,4 @@
-# このファイルのタイトル（短くわかりやすく）
 name: Continuous Integration
-
-# トリガー: mainブランチへのpushやpull_request時にこのworkflowを起動
 on:
   push:
     branches:
@@ -10,32 +7,30 @@ on:
     branches:
       - main
 
-# ジョブの定義（1つでもエラーだと、エラーになる。）
 jobs:
-  # ジョブの名前: build_and_test
   build_and_test:
-    # このジョブは最新のUbuntuイメージ上で実行
     runs-on: ubuntu-latest
-
-    # ジョブのステップのリスト
     steps:
-      # コードのチェックアウト: カレントランナーにリポジトリのコードをチェックアウト
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Node.jsのセットアップ: Node.js v14をセットアップ
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "14"
 
-      # 依存関係のインストール: yarnを使って依存関係をインストール
       - name: Install dependencies
         run: npm install
 
       # Lint実行: ESLintを使用してソースコードのlintを行います。
       - name: Lint with eslint
         run: npm run lint
+
+      - name: Test Storybook
+        run: npm run test-storybook
+
+      - name: Test Jest
+        run: npm run test-jest
 
       # # DangerJSの実行: PRでの変更をチェックして、警告やエラーを報告
       # - name: Run Danger JS
