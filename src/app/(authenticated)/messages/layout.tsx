@@ -1,5 +1,5 @@
 import { Heading, Inner, Link } from "@/components/atoms";
-import { cookies } from "next/headers";
+import { useAuthToken } from "@/hooks/useJwtToken";
 import { User } from "@/types/user";
 import { Message } from "@/types/message";
 import { GroupItem } from "@/app/(authenticated)/messages/_component/GroupItem";
@@ -18,7 +18,7 @@ type Props = {
 };
 
 export default async function MainLayout({ children }: Props) {
-  const token = cookies().get("next-auth.session-token")?.value;
+  const token = useAuthToken();
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/dm_groups`,
     {

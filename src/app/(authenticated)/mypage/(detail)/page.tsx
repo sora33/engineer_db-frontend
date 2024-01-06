@@ -1,18 +1,12 @@
-import { cookies } from "next/headers";
 import { User } from "@/types/user";
 import { Description, Heading } from "@/components/atoms";
 import { ProfileForm } from "@/app/(authenticated)/mypage/(detail)/_component/ProfileForm";
 import { useCurrentUserId } from "@/app/(authenticated)/_component/useCurrentUserId";
 import { ProfileDialog } from "@/app/(authenticated)/mypage/(detail)/_component/ProfileDialog";
+import { useAuthToken } from "@/hooks/useJwtToken";
 
 export default async function Page() {
-  const secureCookie =
-    process.env.NEXTAUTH_URL?.startsWith("https://") ?? !!process.env.VERCEL;
-  const cookieName = secureCookie
-    ? "__Secure-next-auth.session-token"
-    : "next-auth.session-token";
-  const token = cookies().get(cookieName)?.value;
-
+  const token = useAuthToken();
   const currentUserId = await useCurrentUserId();
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/users/${currentUserId}`,

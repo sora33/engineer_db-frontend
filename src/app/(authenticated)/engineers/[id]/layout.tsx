@@ -1,9 +1,10 @@
 import { Inner, LinkText } from "@/components/atoms";
 import { UserTabs } from "@/app/(authenticated)/mypage/_component/UserTabs";
-import { cookies } from "next/headers";
+import { useAuthToken } from "@/hooks/useJwtToken";
 import { User } from "@/types/user";
 import { Metadata } from "next";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { cookies } from "next/headers";
 
 export async function generateMetadata({
   params,
@@ -12,7 +13,12 @@ export async function generateMetadata({
     id: string;
   };
 }): Promise<Metadata> {
-  const token = cookies().get("next-auth.session-token")?.value;
+  const secureCookie =
+    process.env.NEXTAUTH_URL?.startsWith("https://") ?? !!process.env.VERCEL;
+  const cookieName = secureCookie
+    ? "__Secure-next-auth.session-token"
+    : "next-auth.session-token";
+  const token = cookies().get(cookieName)?.value;
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/users/${params.id}`,
     {
@@ -32,7 +38,7 @@ type Props = {
   params: { id: string };
 };
 export default async function MainLayout({ children, params }: Props) {
-  const token = cookies().get("next-auth.session-token")?.value;
+  const token = useAuthToken();
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/users/${params.id}`,
     {

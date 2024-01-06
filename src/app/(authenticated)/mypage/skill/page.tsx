@@ -1,4 +1,4 @@
-import { cookies } from "next/headers";
+import { useAuthToken } from "@/hooks/useJwtToken";
 import { Skill } from "@/types/skill";
 import { Heading } from "@/components/atoms";
 import { SkillForm } from "@/app/(authenticated)/mypage/skill/_component/SkillForm";
@@ -6,7 +6,7 @@ import { useCurrentUserId } from "@/app/(authenticated)/_component/useCurrentUse
 import { SkillExplain } from "@/app/(authenticated)/mypage/skill/_component/SkillExplain";
 
 export default async function Page() {
-  const token = cookies().get("next-auth.session-token")?.value;
+  const token = useAuthToken();
   const currentUserId = await useCurrentUserId();
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/users/${currentUserId}/skills`,

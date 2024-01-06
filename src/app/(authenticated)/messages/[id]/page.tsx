@@ -1,4 +1,4 @@
-import { cookies } from "next/headers";
+import { useAuthToken } from "@/hooks/useJwtToken";
 import { User } from "@/types/user";
 import { Message } from "@/types/message";
 import { EngineerItem } from "@/app/(authenticated)/engineers/(root)/_compoent/EngineerItem";
@@ -9,7 +9,7 @@ type data = {
 };
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const token = cookies().get("next-auth.session-token")?.value;
+  const token = useAuthToken();
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/users/${params.id}/messages`,
     {
