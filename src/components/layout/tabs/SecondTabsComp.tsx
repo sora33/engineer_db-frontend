@@ -4,14 +4,14 @@ import { Inner } from "@/components/atoms";
 import { Link } from "@/components/atoms";
 import { usePathname } from "next/navigation";
 
-type props = {
+type Props = {
   items: {
     link: string;
     name: string;
   }[];
 };
 
-export const SecondTabsComp: React.FC<props> = ({ items }) => {
+export const SecondTabsComp: React.FC<Props> = ({ items }) => {
   const pathname = usePathname();
 
   return (

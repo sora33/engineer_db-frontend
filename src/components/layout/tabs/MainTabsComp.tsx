@@ -4,14 +4,14 @@ import { Inner } from "@/components/atoms";
 import { Link } from "@/components/atoms";
 import { usePathname } from "next/navigation";
 
-type props = {
+type Props = {
   items: {
     link: string;
     name: string;
   }[];
 };
 
-export const MainTabsComp: React.FC<props> = ({ items }) => {
+export const MainTabsComp: React.FC<Props> = ({ items }) => {
   const pathname = usePathname();
 
   return (
@@ -25,7 +25,7 @@ export const MainTabsComp: React.FC<props> = ({ items }) => {
                   href={item.link}
                   className={`inline-block pb-1 pt-2 text-gray-500 hover:text-gray-900
                   ${
-                    pathname.includes(item.link)
+                    pathname && pathname.includes(item.link)
                       ? "border-b-2 border-gray-900 text-gray-900"
                       : ""
                   }`}
