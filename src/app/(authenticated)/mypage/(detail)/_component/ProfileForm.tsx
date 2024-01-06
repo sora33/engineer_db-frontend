@@ -96,7 +96,9 @@ export const ProfileForm: React.FC<Props> = ({ user }) => {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>ユーザー名</FormLabel>
+                <FormLabel>
+                  ユーザー名<span className="text-red-500">*</span>
+                </FormLabel>
                 <FormControl>
                   <Input placeholder="たろう" {...field} />
                 </FormControl>
