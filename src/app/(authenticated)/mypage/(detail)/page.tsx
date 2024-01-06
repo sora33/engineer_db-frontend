@@ -6,7 +6,13 @@ import { useCurrentUserId } from "@/app/(authenticated)/_component/useCurrentUse
 import { ProfileDialog } from "@/app/(authenticated)/mypage/(detail)/_component/ProfileDialog";
 
 export default async function Page() {
-  const token = cookies().get("next-auth.session-token")?.value;
+  const secureCookie =
+    process.env.NEXTAUTH_URL?.startsWith("https://") ?? !!process.env.VERCEL;
+  const cookieName = secureCookie
+    ? "__Secure-next-auth.session-token"
+    : "next-auth.session-token";
+  const token = cookies().get(cookieName)?.value;
+
   const currentUserId = await useCurrentUserId();
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/users/${currentUserId}`,
