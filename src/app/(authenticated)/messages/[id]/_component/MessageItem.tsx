@@ -14,8 +14,8 @@ export const MessageItem: React.FC<Props> = ({ message }) => {
 
   return (
     <div
-      className={`inline-block min-w-[240px] max-w-[480px] text-sm ${
-        isMyMessage && "ml-auto"
+      className={`inline-block max-w-[480px] text-sm ${
+        isMyMessage ? "ml-auto" : "mr-auto"
       }
     `}
     >
