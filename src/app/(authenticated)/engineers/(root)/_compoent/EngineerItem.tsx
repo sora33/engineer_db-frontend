@@ -65,12 +65,12 @@ export const EngineerItem: React.FC<Props> = ({ user }) => {
           <p>
             {user.hobby ? (
               <>
-                <span className="">趣味：</span>
+                <span className="font-bold text-slate-500">趣味：</span>
                 <span>
-                  {isHobbyShow || user.hobby?.length <= 20
+                  {isHobbyShow || user.hobby?.length <= 120
                     ? user.hobby
-                    : `${user.hobby?.substring(0, 20)}`}
-                  {!isHobbyShow && user.hobby?.length > 20 && (
+                    : `${user.hobby?.substring(0, 120)}`}
+                  {!isHobbyShow && user.hobby?.length > 120 && (
                     <span
                       className="cursor-pointer text-orange-600"
                       onClick={(e) => {
@@ -84,18 +84,18 @@ export const EngineerItem: React.FC<Props> = ({ user }) => {
                 </span>
               </>
             ) : (
-              <span>趣味：未設定</span>
+              <span></span>
             )}
           </p>
           <p>
             {user.introduction ? (
               <>
-                <span className="">自己紹介：</span>
+                <span className="font-bold text-slate-500">自己紹介：</span>
                 <span>
-                  {isIntroductionShow || user.introduction?.length <= 20
+                  {isIntroductionShow || user.introduction?.length <= 120
                     ? user.introduction
-                    : `${user.introduction?.substring(0, 20)}`}
-                  {!isIntroductionShow && user.introduction?.length > 20 && (
+                    : `${user.introduction?.substring(0, 120)}`}
+                  {!isIntroductionShow && user.introduction?.length > 120 && (
                     <span
                       className="cursor-pointer text-orange-600"
                       onClick={(e) => {
@@ -109,7 +109,7 @@ export const EngineerItem: React.FC<Props> = ({ user }) => {
                 </span>
               </>
             ) : (
-              <span>自己紹介：未設定</span>
+              <span></span>
             )}
           </p>
         </div>
