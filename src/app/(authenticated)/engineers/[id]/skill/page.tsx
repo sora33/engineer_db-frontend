@@ -1,11 +1,11 @@
-import { cookies } from "next/headers";
+import { useAuthToken } from "@/hooks/useJwtToken";
 import { Skill } from "@/types/skill";
 import { Heading } from "@/components/atoms";
 import { SkillForm } from "@/app/(authenticated)/mypage/skill/_component/SkillForm";
 import { SkillExplain } from "@/app/(authenticated)/mypage/skill/_component/SkillExplain";
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const token = cookies().get("next-auth.session-token")?.value;
+  const token = useAuthToken();
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/users/${params.id}/skills`,
     {

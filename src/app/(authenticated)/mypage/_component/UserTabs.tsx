@@ -1,6 +1,7 @@
 "use client";
 import { SecondTabsComp } from "@/components/layout/tabs/SecondTabsComp";
 import { useParams } from "next/navigation";
+import { useCurrentUser } from "@/app/(authenticated)/_component/UserContext";
 
 type Props = {
   variant?: "mypage" | "engineer";
@@ -8,6 +9,9 @@ type Props = {
 
 export const UserTabs: React.FC<Props> = ({ variant = "mypage" }) => {
   const { id } = useParams();
+  const { currentUser } = useCurrentUser();
+  const isMyPage = currentUser?.id == id;
+
   let path;
   if (variant === "engineer") {
     path = `/engineers/${id}`;
@@ -30,7 +34,7 @@ export const UserTabs: React.FC<Props> = ({ variant = "mypage" }) => {
     },
   ];
 
-  if (variant === "engineer") {
+  if (variant === "engineer" && !isMyPage) {
     UserTabsItems.push({
       link: `/messages/${id}`,
       name: "Message",

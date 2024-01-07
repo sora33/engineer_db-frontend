@@ -42,23 +42,23 @@ export default async function Page() {
   return (
     <div className="relative">
       <SignOutToast />
-      <div className="overflow-hidden bg-slate-50 py-20 text-center md:py-32">
+      <div className="overflow-hidden bg-slate-100 py-20 text-center md:py-32">
         <Inner>
           <div>
-            <h1 className="text-2xl font-bold text-orange-500/90 md:text-3xl">
+            <h1 className="text-2xl font-bold text-orange-500/90 md:text-4xl">
               エンジニアのデータを
               <br />
               ここに集約
             </h1>
           </div>
           <div>
-            <Text size="sm" className="mt-8 font-bold">
+            <Text size="md" className="mt-8 font-bold">
               仲間も仕事も情熱も、ここでつながる。
             </Text>
             <Text size="sm" className="mt-4 hidden md:block">
-              エンジニアのデータが集まり、エンジニアや仕事に出会えるサービスです。
+              エンジニアのデータがここに集まり、
               <br />
-              仕事や交流など、それぞれの目的に合わせてご活用ください。
+              それを通して、仲間や仕事に出会えるサービスです。
             </Text>
             <Text size="sm" className="mt-4 md:hidden">
               エンジニアのデータが集まり、

@@ -45,6 +45,9 @@ export const SkillRangeBar: React.FC<Props> = ({
       <Heading as="h2">{title}</Heading>
       <div className="relative overflow-x-auto md:rounded-lg md:p-4 md:shadow-md">
         <div className="flex py-2 text-xs font-bold text-slate-600 sm:text-sm">
+          {/* 消さないで　レイアウト調整用 */}
+          <div className="w-48 pl-4 sm:w-60" />
+          {/* 消さないで　レイアウト調整用 */}
           <div className="flex w-full justify-between pr-4">
             {["未経験", "", "", "Lv.3", "", "Lv.5", "", "Lv.7"].map(
               (value, i) => (

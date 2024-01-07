@@ -1,10 +1,10 @@
 import { Heading, LinkText, Description } from "@/components/atoms";
 import { SearchForm } from "@/app/(authenticated)/engineers/(root)/_compoent/SearchForm";
-import { cookies } from "next/headers";
+import { useAuthToken } from "@/hooks/useJwtToken";
 import { User } from "@/types/user";
 
 export default async function Page({ searchParams }: { searchParams: string }) {
-  const token = cookies().get("next-auth.session-token")?.value;
+  const token = useAuthToken();
   const queryParams = new URLSearchParams(searchParams).toString();
 
   const res = await fetch(

@@ -4,11 +4,11 @@ import { BarChartPerAge } from "@/app/(authenticated)/engineers/dashboard/_compo
 import { DonutChartPurpose } from "@/app/(authenticated)/engineers/dashboard/_component/DonutChartPurpose";
 import { DonutChartOccupation } from "@/app/(authenticated)/engineers/dashboard/_component/DonutChartOccupation";
 import { DonutChartWork } from "@/app/(authenticated)/engineers/dashboard/_component/DonutChartWork";
-import { cookies } from "next/headers";
+import { useAuthToken } from "@/hooks/useJwtToken";
 import { DashBoard } from "@/app/(authenticated)/engineers/dashboard/_component/type";
 
 export default async function Page() {
-  const token = cookies().get("next-auth.session-token")?.value;
+  const token = useAuthToken();
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/dashboard`,
     {
