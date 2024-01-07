@@ -39,37 +39,50 @@ export const SearchPagination: React.FC<Props> = ({
             />
           </PaginationItem>
         )}
-        <PaginationItem>
-          <PaginationLink
-            href={`?${paramsWithoutPage}&page=1`}
-            isActive={currentPage === 1}
-          >
-            1
-          </PaginationLink>
-        </PaginationItem>
-        {startPage > 2 && "..."}
-        {Array.from({ length: endPage - startPage + 1 }).map((_, index) => {
-          const pageNumber = startPage + index;
-          return (
-            <PaginationItem key={pageNumber}>
+        {totalPages > 1 ? (
+          <>
+            <PaginationItem>
               <PaginationLink
-                href={`?${paramsWithoutPage}&page=${pageNumber}`}
-                isActive={currentPage === pageNumber}
+                href={`?${paramsWithoutPage}&page=1`}
+                isActive={currentPage === 1}
               >
-                {pageNumber}
+                1
               </PaginationLink>
             </PaginationItem>
-          );
-        })}
-        {endPage < totalPages - 1 && "..."}
-        <PaginationItem>
-          <PaginationLink
-            href={`?${paramsWithoutPage}&page=${totalPages}`}
-            isActive={currentPage === totalPages}
-          >
-            {totalPages}
-          </PaginationLink>
-        </PaginationItem>
+            {startPage > 2 && "..."}
+            {Array.from({ length: endPage - startPage + 1 }).map((_, index) => {
+              const pageNumber = startPage + index;
+              return (
+                <PaginationItem key={pageNumber}>
+                  <PaginationLink
+                    href={`?${paramsWithoutPage}&page=${pageNumber}`}
+                    isActive={currentPage === pageNumber}
+                  >
+                    {pageNumber}
+                  </PaginationLink>
+                </PaginationItem>
+              );
+            })}
+            {endPage < totalPages - 1 && "..."}
+            <PaginationItem>
+              <PaginationLink
+                href={`?${paramsWithoutPage}&page=${totalPages}`}
+                isActive={currentPage === totalPages}
+              >
+                {totalPages}
+              </PaginationLink>
+            </PaginationItem>
+          </>
+        ) : (
+          <PaginationItem>
+            <PaginationLink
+              href={`?${paramsWithoutPage}&page=1`}
+              isActive={currentPage === 1}
+            >
+              1
+            </PaginationLink>
+          </PaginationItem>
+        )}
         {nextPage && (
           <PaginationItem>
             <PaginationNext href={`?${paramsWithoutPage}&page=${nextPage}`} />
