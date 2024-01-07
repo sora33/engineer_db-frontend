@@ -40,7 +40,7 @@ export default async function MainLayout({ children }: Props) {
             <section className="grid  items-start gap-4 md:flex">
               <div className="overflow-hidden md:sticky md:top-12 md:h-[calc(100vh-16rem)]">
                 <div className="grid h-full gap-4 rounded shadow md:w-96 md:overflow-y-scroll md:p-4">
-                  <div className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-2">
                     {dmGroupUsers && dmGroupUsers.length > 0 ? (
                       dmGroupUsers
                         .sort(

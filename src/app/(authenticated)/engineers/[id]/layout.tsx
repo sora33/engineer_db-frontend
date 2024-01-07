@@ -5,6 +5,8 @@ import { User } from "@/types/user";
 import { Metadata } from "next";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cookies } from "next/headers";
+import { useCurrentUserId } from "@/app/(authenticated)/_component/useCurrentUserId";
+import { redirect } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -38,6 +40,12 @@ type Props = {
   params: { id: string };
 };
 export default async function MainLayout({ children, params }: Props) {
+  const currentUserId = await useCurrentUserId();
+  const isMyPage = currentUserId == params.id;
+  if (isMyPage) {
+    redirect("/mypage");
+  }
+
   const token = useAuthToken();
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/users/${params.id}`,
