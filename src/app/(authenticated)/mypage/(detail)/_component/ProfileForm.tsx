@@ -34,11 +34,23 @@ import {
   ExperienceOptions,
   PrefectureOptions,
 } from "@/lib/ontions";
+
+const isUrl = (value: string) => {
+  const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+  return urlRegex.test(value);
+};
 const FormSchema = z.object({
   name: z.string(),
   birthday: z.string().optional(),
   location: z.string().max(25).optional(),
-  website: z.string().url("有効なURLを入力してください").max(200).optional(),
+  website: z
+    .string()
+    .max(200)
+    .refine(
+      (value) => value === "" || isUrl(value),
+      "有効なURLを入力してください"
+    )
+    .optional(),
   purpose: z.string().max(25).optional(),
   comment: z.string().max(25).optional(),
   work: z.string().max(25).optional(),
