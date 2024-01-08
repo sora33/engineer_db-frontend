@@ -43,13 +43,13 @@ export const Footer = () => {
           <ul className="grid grid-flow-col-dense grid-rows-3 gap-y-4 text-slate-600 md:grid-rows-3 md:gap-y-8">
             {FooterNavList.map((item) => (
               <li key={item.name}>
-                <Link
+                <a
                   className="text-slate-500 hover:underline"
                   href={item.href}
                   target={item.isExternal ? "_blank" : ""}
                 >
                   {item.name}
-                </Link>
+                </a>
               </li>
             ))}
           </ul>
