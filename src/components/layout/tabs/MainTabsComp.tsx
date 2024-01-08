@@ -16,7 +16,7 @@ export const MainTabsComp: React.FC<Props> = ({ items }) => {
 
   return (
     <>
-      <nav className="md:py0 fixed bottom-0 z-40 w-full bg-white py-1 md:sticky md:top-0">
+      <nav className="sticky top-0 z-40 w-full bg-white py-1">
         <Inner size="lg">
           <ul className="flex gap-x-6 font-bold">
             {items.map((item) => (

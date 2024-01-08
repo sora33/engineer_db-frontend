@@ -6,7 +6,7 @@ import { linkClicked as progressBarLinkClicked } from "nextjs13-progress";
 import { ReactNode } from "react";
 import { tv } from "tailwind-variants";
 
-export const LinkTextVariants = tv({
+export const LinkVariants = tv({
   base: "",
 });
 
@@ -14,10 +14,10 @@ interface Props extends LinkProps {
   children: ReactNode;
   className?: string;
 }
-export const LinkText = forwardRef<HTMLAnchorElement, Props>(
+export const Link = forwardRef<HTMLAnchorElement, Props>(
   ({ onClick, className, children, ...rest }, ref) => (
     <NextLink
-      className={LinkTextVariants({ className })}
+      className={LinkVariants({ className })}
       onClick={(event) => {
         if (onClick) {
           onClick(event);
@@ -33,4 +33,4 @@ export const LinkText = forwardRef<HTMLAnchorElement, Props>(
   )
 );
 
-LinkText.displayName = "Link";
+Link.displayName = "Link";

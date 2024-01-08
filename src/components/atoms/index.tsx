@@ -6,5 +6,5 @@ export { LinkText } from "@/components/atoms/link/LinkText";
 export { Span } from "@/components/atoms/span";
 export { Loading } from "@/components/atoms/loading";
 export { Button } from "@/components/atoms/button";
-export { default as Link } from "next/link";
+export { Link } from "@/components/atoms/link";
 export { default as Image } from "next/image";

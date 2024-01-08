@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/footer";
 import { NextAuthProvider } from "@/providers/NextAuthProvider";
 import { ToastProvider } from "@/providers/ToastProvider";
 import { CurrentUserProvider } from "@/app/(authenticated)/_component/UserContext";
+import { Next13NProgress } from "nextjs13-progress";
 
 export const metadata: Metadata = {
   title: {
@@ -51,6 +52,7 @@ export default function RootLayout({
           <CurrentUserProvider>
             <ToastProvider>
               <Header />
+              <Next13NProgress color="orange" />
               <main className="">{children}</main>
               <Footer />
             </ToastProvider>

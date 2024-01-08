@@ -6,6 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 import { UserWithLastMessage } from "@/app/(authenticated)/messages/layout";
 import { formatDateTime } from "@/lib/date";
 import { useState } from "react";
+import { Link } from "@/components/atoms";
 
 type Props = {
   user: UserWithLastMessage;
@@ -40,22 +41,18 @@ export const GroupItem: React.FC<Props> = ({ user }) => {
         )}
       </div>
       <div className="flex gap-4">
-        <Avatar
-          onClick={(e) => {
-            e.stopPropagation();
-            router.push(`/engineers/${user.id}`);
-          }}
-        >
-          <AvatarImage
-            src={
-              user?.avatar
-                ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/${user.avatar}`
-                : ""
-            }
-          />
-          <AvatarFallback>{user.name?.substring(0, 2) || ""}</AvatarFallback>
-        </Avatar>
-
+        <Link href={`/engineers/${user.id}`}>
+          <Avatar>
+            <AvatarImage
+              src={
+                user?.avatar
+                  ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/${user.avatar}`
+                  : ""
+              }
+            />
+            <AvatarFallback>{user.name?.substring(0, 2) || ""}</AvatarFallback>
+          </Avatar>
+        </Link>
         <div className="w-full">
           <div className="flex w-full">
             <p className="mr-4 font-bold">{user.name}</p>

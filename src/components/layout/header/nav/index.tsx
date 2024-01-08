@@ -1,9 +1,9 @@
 import { getServerSession } from "next-auth/next";
 import { SignInButton } from "@/components/layout/header/nav/SignInButton";
 import { AvatarMenu } from "@/components/layout/header/nav/AvatarMenu";
-import { BellIcon, SearchIcon } from "lucide-react";
+import { SearchIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from "@/components/atoms";
 
 export const Nav = async () => {
   const session = await getServerSession();

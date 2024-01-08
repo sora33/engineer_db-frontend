@@ -15,6 +15,7 @@ import { UserIcon, UserCircle2, X } from "lucide-react";
 import { AvatarForm } from "@/components/layout/header/nav/AvatarForm";
 import { useState } from "react";
 import { useCurrentUser } from "@/app/(authenticated)/_component/UserContext";
+import { Link } from "@/components/atoms";
 
 export const AvatarMenu = () => {
   const router = useRouter();
@@ -42,10 +43,10 @@ export const AvatarMenu = () => {
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem className="cursor-pointer py-0">
-            <div className="flex py-2" onClick={() => router.push(`/mypage`)}>
+            <Link href="/mypage" className="flex py-2">
               <UserIcon className="mr-2 h-4 w-4" />
               <span>マイページ</span>
-            </div>
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem className="cursor-pointer py-0">
             <div className="flex py-2" onClick={() => setIsShowDialog(true)}>
@@ -54,10 +55,10 @@ export const AvatarMenu = () => {
             </div>
           </DropdownMenuItem>
           <DropdownMenuItem className="cursor-pointer py-0">
-            <div className="flex py-2" onClick={() => router.push(`/quit`)}>
+            <Link href="/quit" className="flex py-2">
               <X className="mr-2 h-4 w-4" />
               <span>退会する</span>
-            </div>
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem className="cursor-pointer py-0">
