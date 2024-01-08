@@ -40,6 +40,7 @@
     "next": "13.5.4",
     "next-auth": "^4.24.5",
     "next-remove-imports": "^1.0.12",
+    "nextjs13-progress": "^1.2.1",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.48.2",
