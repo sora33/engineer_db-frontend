@@ -45,13 +45,13 @@ export const ProfileView: React.FC<Props> = ({ user }) => {
     {
       label: "ウェブサイト（SNSなど）",
       value: user.website ? (
-        <Link
+        <a
           className="text-orange-500 hover:underline"
           href={user.website}
           target="_blank"
         >
           {user.website}
-        </Link>
+        </a>
       ) : (
         <span className="text-slate-500">未設定</span>
       ),
