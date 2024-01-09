@@ -1,8 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, RefObject } from "react";
 
-export const useIntersection = (
-  ref: React.MutableRefObject<HTMLDivElement>
-) => {
+export const useIntersection = (ref: RefObject<HTMLDivElement>) => {
   const [intersecting, setIntersecting] = useState(false);
 
   useEffect(() => {
