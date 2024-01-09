@@ -54,7 +54,7 @@ export default async function MainLayout({ children }: Props) {
                     ) : (
                       <Link
                         href="/engineers"
-                        className={`rounde group grid cursor-pointer gap-0 p-4 text-[14px] shadow hover:bg-orange-50`}
+                        className={`rounde group grid cursor-pointer gap-0 bg-white p-4 text-[14px] shadow hover:bg-orange-50`}
                       >
                         <p>メッセージ履歴がありません。</p>
                         <p className="text-orange-500 group-hover:underline">

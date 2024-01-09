@@ -28,7 +28,11 @@ export const GroupItem: React.FC<Props> = ({ user }) => {
     <div
       key={user.id}
       className={`rounde grid cursor-pointer gap-0 p-4 text-[14px] shadow hover:bg-orange-50
-      ${id == user.id ? "border-r-2 border-r-orange-500 bg-orange-50" : ""}
+      ${
+        id == user.id
+          ? "border-r-2 border-r-orange-500 bg-orange-50"
+          : "bg-white"
+      }
       ${isNotRead && "shadow-lg"}
       `}
       onClick={hundleClick}
