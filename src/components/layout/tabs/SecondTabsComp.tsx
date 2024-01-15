@@ -22,10 +22,10 @@ export const SecondTabsComp: React.FC<Props> = ({ items }) => {
             <li key={item.name} className="">
               <Link
                 href={item.link}
-                className={`inline-block rounded-lg border bg-white px-2 py-1 text-gray-500 hover:bg-orange-100
+                className={`inline-block rounded-lg border bg-white px-2 py-1 text-gray-500 hover:bg-orange-50
                   ${
                     pathname === item.link
-                      ? "border-orange-300 bg-orange-100 text-orange-400"
+                      ? "border-orange-300 bg-orange-50 text-orange-500"
                       : ""
                   }`}
               >
