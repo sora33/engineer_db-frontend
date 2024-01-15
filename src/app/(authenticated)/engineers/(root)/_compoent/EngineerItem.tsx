@@ -1,4 +1,3 @@
-"use client";
 import {
   Card,
   CardContent,
@@ -11,7 +10,6 @@ import { useState } from "react";
 import { User } from "@/types/user";
 import { formatTimeAgo, calculateAge, formatBirthDate } from "@/lib/date";
 import { WorkOptions, OccupationOptions } from "@/lib/ontions";
-import { useRouter } from "next/navigation";
 import { Link } from "@/components/atoms";
 
 type Props = {
@@ -19,12 +17,8 @@ type Props = {
 };
 
 export const EngineerItem: React.FC<Props> = ({ user }) => {
-  const router = useRouter();
-  const [isHobbyShow, setIsHobbyShow] = useState(false);
-  const [isIntroductionShow, setIsIntroductionShow] = useState(false);
-
   return (
-    <Link href={`/engineers/${user.id}`}>
+    <Link href={`/engineers/${user.id}`} className="">
       <Card className="cursor-pointer hover:bg-slate-50">
         <CardHeader>
           <CardTitle className="flex items-center gap-4">
@@ -62,18 +56,15 @@ export const EngineerItem: React.FC<Props> = ({ user }) => {
         </CardHeader>
         <CardContent>
           <p className="pb-1">{user.comment}</p>
-          <div className="text-xs">
+          <div className="hidden text-xs md:block">
             <p>
               {user.hobby ? (
                 <>
                   <span className="font-bold text-slate-500">趣味：</span>
                   <span>
-                    {isHobbyShow || user.hobby?.length <= 50
+                    {user.hobby?.length <= 50
                       ? user.hobby
                       : `${user.hobby?.substring(0, 50)}`}
-                    {!isHobbyShow && user.hobby?.length > 50 && (
-                      <span className="">...</span>
-                    )}
                   </span>
                 </>
               ) : (
@@ -85,12 +76,9 @@ export const EngineerItem: React.FC<Props> = ({ user }) => {
                 <>
                   <span className="font-bold text-slate-500">自己紹介：</span>
                   <span>
-                    {isIntroductionShow || user.introduction?.length <= 50
+                    {user.introduction?.length <= 50
                       ? user.introduction
                       : `${user.introduction?.substring(0, 50)}`}
-                    {!isIntroductionShow && user.introduction?.length > 50 && (
-                      <span className="">...</span>
-                    )}
                   </span>
                 </>
               ) : (

@@ -68,7 +68,7 @@ export const CustomSelect: React.FC<CustomSelectProps> = ({
     control={control}
     name={name}
     render={({ field }) => (
-      <FormItem className="w-auto md:w-80">
+      <FormItem className="w-auto">
         <FormLabel>{label}</FormLabel>
         <Select onValueChange={field.onChange} defaultValue={field.value}>
           <FormControl>
