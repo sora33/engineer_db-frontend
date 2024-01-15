@@ -118,7 +118,7 @@ export default async function Page() {
                 最終的なビジョンは、
                 <br />
                 <span className="highlight">
-                  「本サービスに登録するだけで、企業やエンジニアと繋がれる状態を実現すること」です。
+                  「本サービスに登録するだけで、企業やエンジニアと繋がる状態を実現すること」です。
                 </span>
               </Text>
             </div>
