@@ -43,6 +43,7 @@ export const PostForm: React.FC<Props> = ({ hundleSubmit }) => {
       });
       toast({ title: "更新できました。", type: "success" });
       form.setValue("content", "");
+      setIsShowDisplay(false);
       hundleSubmit();
     } catch (error) {
       toast({ title: "エラーが発生しました", type: "error" });
@@ -67,7 +68,7 @@ export const PostForm: React.FC<Props> = ({ hundleSubmit }) => {
             }}
             textareaProps={{
               placeholder:
-                "## 〇〇な人を募集しています〜！\n### 詳細\n来月から開発します。〇〇できる人、こちらから連絡してください！\n",
+                "## 〇〇な人を募集しています〜！\n### 詳細\n来月から開発します。〇〇できる人、DMにてご連絡ください！\n",
             }}
             previewOptions={{
               rehypePlugins: [[rehypeSanitize]],
@@ -99,7 +100,8 @@ export const PostForm: React.FC<Props> = ({ hundleSubmit }) => {
         </div>
       ) : (
         <button
-          className="fixed bottom-12 right-4 z-50 cursor-pointer rounded-full bg-teal-500/90 px-4 py-3 text-sm text-white transition-all hover:bg-teal-600/100 md:sticky md:top-14 md:py-2"
+          className="fixed bottom-12 right-4 z-50 cursor-pointer rounded-full bg-teal-500/90 px-4 py-3 text-sm text-white transition-all hover:bg-teal-600/100
+                    md:sticky md:top-14 md:ml-auto md:inline-block md:w-[180px] md:py-2"
           onClick={hundleClick}
         >
           投稿フォームを開く
