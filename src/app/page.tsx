@@ -1,5 +1,6 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import { Loading } from "@/components/atoms";
 
 export default async function Page() {
   const session = await getServerSession();
@@ -9,5 +10,9 @@ export default async function Page() {
     redirect("/login");
   }
 
-  return null;
+  return (
+    <div className="flex h-screen items-center justify-center">
+      <Loading />
+    </div>
+  );
 }

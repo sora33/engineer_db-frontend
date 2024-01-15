@@ -1,9 +1,7 @@
 import { getServerSession } from "next-auth/next";
 import { SignInButton } from "@/components/layout/header/nav/SignInButton";
 import { AvatarMenu } from "@/components/layout/header/nav/AvatarMenu";
-import { SearchIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Link } from "@/components/atoms";
+import { SearchDialog } from "@/components/layout/header/nav/SearchDialog";
 
 export const Nav = async () => {
   const session = await getServerSession();
@@ -14,14 +12,7 @@ export const Nav = async () => {
         {isLogin ? (
           <>
             <li className="flex items-center">
-              <Button variant="ghost" className="px-2">
-                <Link href="/engineers" className="flex items-center">
-                  <SearchIcon className="mr-2 h-5 w-5" />
-                  <span className="hidden md:inline-block">
-                    エンジニアを探す
-                  </span>
-                </Link>
-              </Button>
+              <SearchDialog />
             </li>
             {/* <li className="flex items-center">
               <Button variant="ghost" className="px-2">

@@ -29,7 +29,11 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <div className="grid gap-8">
-        {data.otherUser && <EngineerItem user={data.otherUser} />}
+        {data.otherUser && (
+          <div className="sticky top-12">
+            <EngineerItem user={data.otherUser} />
+          </div>
+        )}
         <MessageList messages={data.messages} />
       </div>
     </>

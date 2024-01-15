@@ -1,4 +1,4 @@
-import { Image, Text } from "@/components/atoms";
+import { Image, Text, Heading } from "@/components/atoms";
 
 type props = {
   index: number;
@@ -16,13 +16,13 @@ export const EngineerDbAboutCtt: React.FC<props> = ({
   return (
     <div className="rounded-lg bg-white p-4 py-6 shadow-md md:flex md:p-8">
       <div className="w-full md:w-6/12">
-        <h3 className="mb-4 flex items-center text-xl font-semibold">
+        <Heading as="h3" size="md" className="mb-4 flex items-center">
           <span className="mr-4 flex h-10 w-10 items-center justify-center rounded-full bg-orange-500 text-white">
             {index}
           </span>
           {title}
-        </h3>
-        <Text size="sm" className="mt-4">
+        </Heading>
+        <Text size="base" className="mt-4 md:text-lg">
           {description}
         </Text>
       </div>

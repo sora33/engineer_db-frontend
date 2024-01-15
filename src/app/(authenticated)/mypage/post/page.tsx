@@ -1,12 +1,13 @@
-"use client";
-import { useCurrentUser } from "@/app/(authenticated)/_component/UserContext";
+import { useCurrentUserId } from "@/app/(authenticated)/_component/useCurrentUserId";
 import { InfinitePostList } from "@/app/(authenticated)/posts/_component/InfinitePostList";
 import { Description, Heading } from "@/components/atoms";
 
-export default function Page() {
-  const { currentUser } = useCurrentUser();
+export default async function Page() {
+  const currentUserId = await useCurrentUserId();
 
-  const apiEndpoint = `/api/users/${currentUser?.id}/posts`;
+  const apiEndpoint = currentUserId
+    ? `/api/users/${currentUserId}/posts`
+    : undefined;
 
   return (
     <>

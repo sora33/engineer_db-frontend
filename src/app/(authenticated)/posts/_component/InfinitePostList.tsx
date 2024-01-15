@@ -9,7 +9,7 @@ import { Post } from "@/types/post";
 import { PostForm } from "@/app/(authenticated)/posts/_component/PostForm";
 
 interface InfinitePostListProps {
-  apiEndpoint: string;
+  apiEndpoint: string | undefined;
   isPostCreate?: boolean;
 }
 
@@ -22,6 +22,7 @@ export const InfinitePostList: React.FC<InfinitePostListProps> = ({
   const limit = 10;
 
   const getKey = (pageIndex: number, previousPageData: Post[]) => {
+    if (!apiEndpoint) return null;
     if (previousPageData && !previousPageData.length) return null;
     return `${apiEndpoint}/?page=${pageIndex + 1}`;
   };

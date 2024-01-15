@@ -1,4 +1,3 @@
-"use client";
 import { InfinitePostList } from "./_component/InfinitePostList";
 
 export default function Page() {
