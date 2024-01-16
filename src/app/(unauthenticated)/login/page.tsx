@@ -19,8 +19,6 @@ const EngineerDbAboutCttList = [
     description: (
       <>
         「エンジニアDB」を通して、エンジニアや企業と新しい出会いを見つけてください。
-        <br />
-        データをみんなで共有することを目的としています。
       </>
     ),
     imageAlt: "「エンジニアDB」でエンジニアを探す様子",
