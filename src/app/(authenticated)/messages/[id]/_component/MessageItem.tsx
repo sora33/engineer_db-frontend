@@ -19,7 +19,7 @@ export const MessageItem: React.FC<Props> = ({ message }) => {
       }
     `}
     >
-      <p
+      <div
         className={`messageContent rounded-t-2xl p-2
           ${
             isMyMessage
@@ -31,7 +31,7 @@ export const MessageItem: React.FC<Props> = ({ message }) => {
         <Linkify componentDecorator={componentDecorator}>
           {formatContent(message.content)}
         </Linkify>
-      </p>
+      </div>
       <div>
         <span className=" text-slate-500">
           {message.createdAt ? formatDateTime(message.createdAt) : ""}
