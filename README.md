@@ -33,7 +33,7 @@ https://qiita.com/hiiragiya/private/69ef1a3556cb63290d13
 詳細は後述しています。
 
 ## スタートガイド
-nodeが必要です。
+node.jsが必要です。
 
 ### 環境変数を設定
 `.env`ファイルを作成し、下記を設定してください。
