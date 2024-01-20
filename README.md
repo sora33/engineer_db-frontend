@@ -1,111 +1,130 @@
-# エンジニア DB のフロントエンド
+# Engineer-db frontend
 
-## 技術スタック
+## プロジェクトの概要
+エンジニアのつながりを促進するサービス「エンジニアDB」のフロントエンドです。
 
-技術選定は、大前提として知識キャッチアップのために、モダンでかつ人気のあるもの、Vercel が推しているものを優先的に選定しています。
+プロダクトの詳細は、こちらの記事を参照ください。
+https://qiita.com/hiiragiya/private/69ef1a3556cb63290d13
+
+## 使用技術一覧
+
+- 言語
+  - TypeScript
+- フレームワーク
+  - Next.js 13 (App Router)
+- 認証ライブラリ
+  - [NextAuth.js](https://next-auth.js.org/)
+- CSSライブラリ
+  - [TailwindCSS](https://tailwindcss.com/)
+  - [Tailwind Variants](https://www.tailwind-variants.org/)
+  - [shadcn/ui](https://ui.shadcn.com/)
+  - [tremor](https://www.tremor.so/)
+- mardown実装ライブラリ
+  - [react-md-editor](https://uiwjs.github.io/react-md-editor)
+  - [sanitizer](https://github.com/rehypejs/rehype-sanitize)
+- UIカタログ
+  - [Storybook](https://storybook.js.org/)
+- テストに関する技術・ライブラリ
+  - [ESLint](https://eslint.org/)
+  - [Pretiier](https://prettier.io/)
+  - [Jest](https://jestjs.io/ja/)
+  - [Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+
+詳細は後述しています。
+
+## スタートガイド
+nodeが必要です。
+
+### 環境変数を設定
+`.env`ファイルを作成し、下記を設定してください。
+| 変数名                  | 役割                                      | DEV 環境での値                           |
+| ----------------------- | ----------------------------------------- | ---------------------------------------- |
+| GITHUB_CLIENT_ID        | GitHub OAuthのクライアントID              | ご自身で設定してください                     |
+| GITHUB_CLIENT_SECRET    | GitHub OAuthのクライアントシークレット    | ご自身で設定してください |
+| NEXTAUTH_SECRET         | NextAuth.jsのシークレット                 | hogehoge |
+| NEXTAUTH_URL            | NextAuth.jsのコールバックURL              | http://localhost:8000                     |
+| NEXT_PUBLIC_BACKEND_URL | バックエンドのエンドポイント                | http://localhost:3000                       |
+
+
+
+### サーバーを起動
+~~~
+npm run dev
+~~~
+
+### その他コマンドについて
+`package.json`のscriptsを参照ください。
+
+## 技術的なこと
 
 ### フレームワーク
+Next.js13のApp Routerを採用しています。 言語はTypeScriptです。。。。
 
-Next.js 13 (App Router)で実装しています。
-これから Next.js は App Router がメインとなってくると思うので App Router を採用しました。
-データをフェッチする処理は全て SSR で記述し、それ以外の部分もなるべく CSR は使わないように実装しています。
-ネット上の意見において、App router は、バグが多かったり、情報が少ない状況で選定しない方針が散見されましたが、今回は自分の技術力アップのために強引に採用しました。
-結果的には、App router を採用してよかったと思っています。Route Groups や Layout を使うことで、ディレクトリ(URL)の設計がしやすく、またディレクトリから設計の意図が読み取りやすいので管理しやすいと感じました。
-できるだけ SSR や ISR で実装を使うよう意識したので、おのずと状態管理をしないように設計・実装するようになっていきました。
-学習教材としては、Nest.js が公式で出している、Learn Next.js がわかりやすくて良かったです。
+#### 採用理由
+キャッチアップを兼ねて、このサービスは、Next.jsの最新に追従していきたいので、採用しました。 
 
-参考
+#### 良かった点
+サーバーサイドデータフェッチが容易になっており、Railsとやりとりする部分は、全てサーバーサイドで処理するように実装しました。 データフェッチの部分では、状態管理が不要となるので、実装がシンプルになりました。
 
-- [Learn Next.js](https://nextjs.org/learn)
+ルーティングとレイアウトの設計がしやすく、ディレクトリ構成から設計の意図が伝わりやすくなったように感じます。
 
-### 言語
+学習教材としては、Nest.js が公式で出している、Learn Next.js がわかりやすいのでおすすめです。
 
-TypeScript を採用しています。型定義していた方が実装が捗ります。
+https://nextjs.org/learn
 
-### CSS ライブラリ
+### CSSやUIコンポーネントのライブラリ
+Tailwind CSS で実装しています。
 
-TailwindCSS をベースで実装しています。
-UI コンポーネントとして、shadcn/ui と tremor を採用しましたが、いずれも TailwindCSS ベースのライブラリです。
-shadcn/ui は、atomic デザインでいうところの atom,module レベルのコンポーネントに利用し、
-tremor は、ダッシュボードのグラフ等のおしゃれにデータを表示させる用のコンポーネントに採用しています。
+UI コンポーネントとして、Shadcn/UIを採用しています。
+Shadcn UIは、Radix UIとTailwind CSSを用いたコンポーネントで、必要なUIのみをプロジェクトにinstallできるようなツールになっています。
 
-参考
+参考: https://ui.shadcn.com/
 
-- [TailwindCSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://www.tailwind-variants.org/)
-- [shadcn/ui](https://ui.shadcn.com/)
-- [tremor](https://www.tremor.so/)
+#### 採用理由
+Tailwind CSSは、クラス名など考える必要がなくスラスラ書けるので、開発速度が圧倒的に速いと思っています。
+ネットではコードが見にくくなるようなデメリットの懸念が散見されましたが、一人で開発していたことや小規模なサービスだったので、気になりませんでした。
 
-### markdown 用のライブラリ
+UI コンポーネントのShadcn/UIについて、
+[2023 JavaScript Rising Stars](https://risingstars.js.org/2023/en)で、スターの増加数が高かったJSのOSSのラインキングで１位にもなっててかなり注目を浴びています。
 
-本サービスは、ターゲットがエンジニアなので、投稿を markdown でできるように設計しました。
-markdown のエディターと表示には、Next.js 公式が推している react-md-editor を採用しています。
-公式のマニュアルを見ほな簡単に実装できましたが、デザイン感があってない気がするので、今後変更するかもしれません。
+使ってみた感想として、
+プロジェクトに応じてスタイルを変更しやすく、ライブラリのような依存関係がないので取り入れやすかったりするので、Tailwind CSSを採用している場合はおすすめです。
 
-- [react-md-editor](https://uiwjs.github.io/react-md-editor)
-- [セキュリティ sanitizer](https://github.com/rehypejs/rehype-sanitize)
-- ![サニタイズできてるっぽい](image.png)
+### Storybook
+#### 採用理由
+コンポーネントの採用利用率を上げるため、UIテストを実装できるため、今後の保守運用の3点です。
+このうち最も魅力に感じているのは、UIのテストを実装できることでした。
 
-### UI カタログ
+Storybook の採用デメリットとして、メンテコストが高い、腐らせてしまうなどが多いようでしたが、下記記事が参考にすると、それらの懸念は解消されると思いました。
 
-Storybook を採用しています。
+つまり、Storybook を採用しても、「プロジェクトの複雑化を避け、ファイル生成のコストを共通化で抑え、スナップショットテストと絡めてリターンを得る。」ことが可能になります。
 
-採用理由はコンポーネントの採用利用率を上げるため、UI テストを実装できるため、今後の保守運用の 3 点です。
-そのうち最も魅力的なのは、テストを実装できることでした。詳細は後述しますが、Storybook を利用したテストは非常に魅力的です。
-Storybook の採用デメリットとして、メンテコストが高い、腐らせてしまうなどが多いようでしたが、下記記事が参考にすると、概ね解消されると思いました。Storybook を採用しても、「プロジェクトの複雑化を避け、ファイル生成のコストを共通化で抑え、スナップショットテストと絡めてリターンを得る。」ことが可能になります。
-
-参考
-
+参考: 
 - [Storybook を導入する際にやるべきこと 3 選](https://zenn.dev/sum0/articles/9463d16d9d40e2)
 - [React 向け Storybook のチュートリアル](https://storybook.js.org/tutorials/intro-to-storybook/react/ja/get-started/)
 
-### テスト
+### テストについて
 
-テストは、ESLint と Pretiier による静的解析、Storybook による UI の単体テストと結合テスト、Jest によるビジネスロジックや関数の単体テストを実装しています。いずれも Github Actions でプルリク時に自動テストするようにしています。
-なお、E2E テストはコストが高かかったので、導入を諦めました。手動でチェックします。。
+ESLint と Pretiier による静的解析、Storybook による UI の単体テストと結合テスト、Jest によるビジネスロジックや関数の単体テストを実装しています。
+Github Actions でプルリク時に、これらのテストが自動で走るように設定しています。
 
-フロントエンドのテスト手法として、Jest や React-testing による単体テストや結合テストが散見されましたが、〇〇コンポーネントに「〇〇」と書いてあればテスト OK のような例が散見されており、効果が薄そうだなぁ感じていました。さらにテスト手法を調べていると、Storybook でインタラクションテストやビジュアルテストリグレッションテストが実装できることがわかりました。なので、UI に関するテストはそちらで実装するように決めました。
+なお、E2E テストはコストがかかりすぎので、導入を諦めました。手動でチェックします。
 
-一部、JS で記述しているビジネスロジックや汎用的な関数は、Jest でテストするようにしています。
+フロントエンドのテスト手法として、Jest や React-testing による単体テストや結合テストが散見されましたが、〇〇コンポーネントに「〇〇」と書いてあればテスト OK のような例が散見されており、効果が薄そうだなぁ感じていました。
 
-参考
+Storybookを使ったテストでは、インタラクションテストやビジュアルテストリグレッションテストが実装できることがわかりました。なので今回、UI に関するテストはStoryBookで実装するように決めました。
+
+参考: 
 
 - [フロントエンドのテスト戦略について考える](https://zenn.dev/koki_tech/articles/a96e58695540a7)
 - [[Next.js]フロントテストのコストは Storybook で削減出来る](https://zenn.dev/sora_kumo/articles/8a79531e726b29#storybook-%E3%81%AE%E8%A8%AD%E5%AE%9A)
-- [ESLint](https://eslint.org/)
-- [Pretiier](https://prettier.io/)
-- [Jest](https://jestjs.io/ja/)
-- [Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 
-## 認証について
-
-本サービスは、エンジニアのみが登録して頂けるように、Github 認証のみを採用しています。
-Next.js 側で、NextAuth.js を利用して認証を実装しています。
-
-### フロー
-
-NextAuth.js と GitHub での認証、NextAuth で生成された JWE を使用して、Rails で JWT を検証する認証
-
-```mermaid
-sequenceDiagram
-    ユーザー->>Next.js (Frontend): ログインボタンをクリック
-    Next.js (Frontend)->>NextAuth.js: GitHub認証の開始リクエスト
-    NextAuth.js->>GitHub: GitHubでの認証をリクエスト
-    GitHub->>NextAuth.js: 認証情報を返す
-    NextAuth.js->>NextAuth.js: 認証情報をもとにJWEを生成
-    NextAuth.js->>Next.js (Frontend): 生成されたJWEを返す
-    Next.js (Frontend)->>ユーザー: ログイン成功とともにJWEを保持
-    ユーザー->>Next.js (Frontend): 保護されたページにアクセス
-    Next.js (Frontend)->>Rails (Backend): JWEを付与してリソース要求
-    Rails (Backend)->>Rails (Backend): JWEの復号化とJWTの検証
-    Rails (Backend)->>Next.js (Frontend): 検証の結果とリソースの返却
-```
-
-## ディレクトリ構成
+### ディレクトリ構成
 
 \_components というディレクトリを切って、いい感じにコンポーネントを管理しています。
-app 以下のディレクトリは、url に影響するので、ディレクトリ名は小文字ハイフンで統一しています。
+urlに関わるディレクトについて、ディレクトリ名は小文字ハイフンで統一しています。
 
+大まかな構成は下記のような感じです。
 ```
 .
 ├── app
@@ -135,33 +154,27 @@ app 以下のディレクトリは、url に影響するので、ディレクト
 │   └── page.tsx  # 認証前後で、リダイレクトを設定している。
 ```
 
-実装前に参考にしていた情報が見つからず、、代わりに調べているとこちらが私の思想に似ていたので共有しておきます。
+詳細は、こちらを参考にしてください。
+App routerでは、このようなディレクトリ構成を採用&おすすめしているケースが多いです。
+
 参考
 
 - [Next.js 13 の ディレクトリ構成](https://scrapbox.io/wwwy-dev/Next.js_13%E3%81%AE_%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E6%A7%8B%E6%88%90)
 
-## ポイント
+### 開発で工夫したところ
 
-- 画像投稿機能について、画像投稿前に、フロントエンド側で画像圧縮するようにした。
-- レンダリングについて、基本的に SSR として、フォームなど状態管理が必要な部分のみを CSR にするようにした。データフェッチ部分は、必ずサーバーサイド側で実装するようにて、認証情報はクライアント側で扱わないようにした。また、データを集計するダッシュボードは、ISR にして、バックエンド側でバッチ処理を実装せずに、フロント側でキャッシュしたデータを扱うようにした。利用者が増えた時に再構築が必要かもしれないが、とりあえずこれでいいと思う。
-- url 設計、UI, UX にはこだわった。クリエイティブは絶望的かもしれない。
-- 無限スクロールとページネーションを使い分けている。投稿一覧ページは無限スクロールとし、ユーザー一覧&検索ページは、pagination はページネーションとしています。 使い分けのポイントは、SEO と UX、URL 設計 と思っています。
-- App Router の機能をちゃんと理解して使っている。
-- フロントエンド側でのキャッシュをちゃんとしました。（メッセージページがわかりやすい？）
+- 画像投稿機能について、画像投稿前に、フロントエンド側で画像圧縮するようにし、無駄なサーバーやストレージのリソースを利用しないようにしました。
+- レンダリングについて、基本的に SSR として、フォームなど状態管理が必要な部分のみを CSR にするようにしました。 また、ダッシュボードページ等の処理が重いページかつ、最新データでなくてもOKなページは、ISR にし、キャッシュしたデータを扱うようにしました。　（0.5hごと更新）
+- url設計やUI, UX は丁寧に設計しました。 トップページなどのクリエイティブが必要な点は、外注すべきと思いました。。
+- 無限スクロールとページネーションを使い分けています。使い分けのポイントは、UI・UXとURLが必要かどうか と思っています。　（今回SEOは関係ないので無視する）
+    - 検索ページは、検索条件やページ数をクエリパラーメータで持たせるようにして、ページネーションを採用しています
+    - それ以外のページは、UIUXの良い無限スクロールでを採用しています。
+
 
 ## 課題・やりたいこと
 
-- トップページのデザインをアウトソースしていい感じにした。
-- ユーザーにできるだけ多くのユーザー情報を登録してもらえるような動線設計を詰めたい
+- トップページのデザインをアウトソースしていい感じにしたい。
+- ユーザーにできるだけ多くのユーザー情報を登録してもらえるような動線設計を詰めたい。
 - テスト手法について、もっと詰めていきたい。
 - Next.js14 にアップデートしていきたい。
 - バックエンドを Rails にしているが、Prisma などを使って Next.js に寄せていきたい。
-
-## 開発者に向けて
-
-### 環境変数
-
-GITHUB_CLIENT_ID=hogehoge
-GITHUB_CLIENT_SECRET=hogehoge
-NEXTAUTH_SECRET=hogehoge
-NEXT_PUBLIC_BACKEND_URL=http://localhost:3000
