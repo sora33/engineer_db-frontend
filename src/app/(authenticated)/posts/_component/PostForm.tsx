@@ -59,7 +59,7 @@ export const PostForm: React.FC<Props> = ({ hundleSubmit }) => {
   return (
     <>
       {isShowDisplay ? (
-        <div className="grid max-w-full gap-4 text-sm">
+        <div className="grid max-w-full gap-4 text-sm" data-color-mode="light">
           <MDEditor
             value={form.watch("content") || ""}
             preview="edit"
