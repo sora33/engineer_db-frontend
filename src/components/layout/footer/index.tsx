@@ -9,7 +9,7 @@ export const FooterNavList = [
     href: "https://forms.gle/aeBUs6YQSRNgTaqz8",
     isExternal: true,
   },
-  { name: "プライバシーポリシー", href: "/policy", isExternal: false },
+  { name: "プライバシーポリシー", href: "/policy", isExternal: true },
   {
     name: "開発者の「X」",
     href: "https://twitter.com/koocookooc",
