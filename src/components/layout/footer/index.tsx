@@ -9,7 +9,7 @@ export const FooterNavList = [
     href: "https://forms.gle/aeBUs6YQSRNgTaqz8",
     isExternal: true,
   },
-  { name: "プライバシーポリシー", href: "/policy", isExternal: false },
+  { name: "プライバシーポリシー", href: "/policy", isExternal: true },
   {
     name: "開発者の「X」",
     href: "https://twitter.com/koocookooc",
@@ -17,7 +17,7 @@ export const FooterNavList = [
   },
   {
     name: "技術的なお話",
-    href: "https://qiita.com/hiiragiya",
+    href: "https://qiita.com/hiiragiya/items/2a11f15d07c7f14c0887",
     isExternal: true,
   },
 ];

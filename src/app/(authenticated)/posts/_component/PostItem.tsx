@@ -65,7 +65,7 @@ export const PostItem: React.FC<Props> = ({ post }) => {
             onDeleted={() => setIsDeleted(true)}
           />
         </div>
-        <div className="postContent overflow-hidden">
+        <div className="postContent overflow-hidden" data-color-mode="light">
           <ReactMdEditor.Markdown
             source={post.content}
             rehypePlugins={[[rehypeSanitize]]}

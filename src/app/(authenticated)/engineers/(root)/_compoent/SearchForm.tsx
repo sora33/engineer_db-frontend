@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   PurposeOptions,
   OccupationOptions,
@@ -31,6 +31,7 @@ type Props = {};
 
 export const SearchForm: React.FC<Props> = () => {
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -41,8 +42,14 @@ export const SearchForm: React.FC<Props> = () => {
       work: searchParams.get("work") || undefined,
       occupation: searchParams.get("occupation") || undefined,
       skill: searchParams.get("skill") || undefined,
-      skillLevel: searchParams.get("skillLevel") || undefined,
+      skillLevel: searchParams.get("skillLevel") || "1",
     },
+  });
+
+  // formの値を監視
+  const { watch } = form;
+  watch((data, { name, type }) => {
+    onSubmit(data);
   });
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
@@ -50,7 +57,7 @@ export const SearchForm: React.FC<Props> = () => {
       .filter(([_, value]) => value !== undefined && value !== "undefined")
       .map(([key, value]) => `${key}=${encodeURIComponent(value as string)}`)
       .join("&");
-    window.location.href = `/engineers?${queryParams}`;
+    router.push(`/engineers?${queryParams}`);
   };
   return (
     <>
