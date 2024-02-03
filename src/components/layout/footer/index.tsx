@@ -17,7 +17,7 @@ export const FooterNavList = [
   },
   {
     name: "技術的なお話",
-    href: "https://qiita.com/hiiragiya",
+    href: "https://qiita.com/hiiragiya/items/2a11f15d07c7f14c0887",
     isExternal: true,
   },
 ];
