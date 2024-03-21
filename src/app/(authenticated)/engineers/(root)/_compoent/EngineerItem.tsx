@@ -35,9 +35,9 @@ export const EngineerItem: React.FC<Props> = ({ user }) => {
               </AvatarFallback>
             </Avatar>
             <span>{user?.name}</span>
-            <span className="text-muted-foreground ml-auto text-xs">
+            {/* <span className="text-muted-foreground ml-auto text-xs">
               最終ログイン：{formatTimeAgo(user.lastSignInAt)}
-            </span>
+            </span> */}
           </CardTitle>
           <CardDescription>
             {user?.birthday &&
