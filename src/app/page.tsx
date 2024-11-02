@@ -40,15 +40,19 @@ export default async function Page() {
   return (
     <div className="relative">
       <SignOutToast />
+      <div className="bg-white py-4">
+        <Inner>
+          <Text size="md" className="font-bold text-red-500">
+            エンジニアDBをご利用いただきありがとうございます。
+            <br />
+            申し訳ございませんが、現在サービスは一時停止中です。
+            <br />
+            再開時期が決まり次第、お知らせいたします。
+          </Text>
+        </Inner>
+      </div>
       <div className="overflow-hidden bg-slate-100 py-20 text-center md:py-32">
         <Inner>
-          <div>
-            <Text size="md" className="font-bold text-red-500">
-              申し訳ございませんが、現在サービスは一時停止中です。
-              <br />
-              再開時期が決まり次第、お知らせいたします。
-            </Text>
-          </div>
           <div>
             <h1 className="text-3xl font-bold text-orange-500/90 sm:text-5xl sm:leading-tight sm:tracking-wider">
               エンジニアのデータを

@@ -6,8 +6,9 @@ import Image from "next/image";
 export const SignInButton = () => {
   return (
     <Button
-      className="bg-[#333] p-2 text-xs text-white hover:bg-[#444] md:text-sm"
-      onClick={() => signIn("github", { callbackUrl: "/mypage" })}
+      className="bg-[#333] p-2 text-xs text-white hover:bg-[#444] md:text-sm disabled:bg-gray-400"
+      // onClick={() => signIn("github", { callbackUrl: "/mypage" })}
+      disabled={true}
     >
       <Image
         src="/img/github-mark-white.png"
