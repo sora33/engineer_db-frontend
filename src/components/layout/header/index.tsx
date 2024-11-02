@@ -10,7 +10,7 @@ export const Header = () => {
           <Link href="/">
             <Logo />
           </Link>
-          <Nav />
+          {/* <Nav /> */}
         </div>
       </Inner>
     </header>
