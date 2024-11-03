@@ -8,8 +8,15 @@ const nextConfig = {
     return [
       {
         source: "/:path*",
-        destination: "",
+        destination: "/sorry",
         permanent: true,
+        has: [
+          {
+            type: "query",
+            key: "path",
+            value: "^(?!sorry).*$"
+          }
+        ]
       },
     ];
   },
