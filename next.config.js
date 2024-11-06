@@ -4,22 +4,6 @@ const nextConfig = {
   // 現在はリダイレクトを無効化しています。
   // 全てのパスを "/"にリダイレクトすると、
   // 他のページにアクセスできなくなってしまうためです。
-  redirects: async () => {
-    return [
-      {
-        source: "/:path*",
-        destination: "/sorry",
-        permanent: true,
-        has: [
-          {
-            type: "query",
-            key: "path",
-            value: "^(?!sorry).*$"
-          }
-        ]
-      },
-    ];
-  },
 };
 
 module.exports = nextConfig;

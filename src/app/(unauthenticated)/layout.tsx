@@ -11,10 +11,4 @@ export default async function MainLayout({
   // if (!session) {
   //   redirect("/login");
   // }
-  return (
-    <>
-      <MainTabs />
-      <div>{children}</div>
-    </>
-  );
 }
